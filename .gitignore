@@ -39,3 +39,15 @@ npm-debug.log
 *.db
 *.db-*
 
+.DS_Store
+
+priv/static/uploads/
+
+log/*
+
+.env
+
+/devops/
+
+.elixir_ls/
+
