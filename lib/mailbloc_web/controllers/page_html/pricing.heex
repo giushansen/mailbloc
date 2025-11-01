@@ -1,0 +1,849 @@
+<Layouts.site flash={@flash} current_scope={@current_scope}>
+  <!-- Hero Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-base-100 to-base-200">
+    <div class="mx-auto max-w-7xl text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span class="text-sm font-semibold text-primary">Fortify your Web Apps, Catapult Performance</span>
+      </div>
+      
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-base-content mb-6">
+        Unlimited Monitoring, Zero Surprises
+      </h1>
+      <p class="text-lg sm:text-xl text-base-content/70 mb-4 max-w-3xl mx-auto">
+        Choose your stronghold and defend your applications with real-time monitoring, security alerts, and comprehensive log insights—all with fixed pricing.
+      </p>
+      <p class="text-base text-base-content/60 max-w-2xl mx-auto">
+        Every plan includes <span class="font-semibold text-primary">unlimited web applications</span> and <span class="font-semibold text-primary">30-day data retention</span>. No usage overages, no surprise invoices.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-base-200">
+    <div class="mx-auto max-w-7xl">
+      <!-- Toggle Switch for Monthly/Annual -->
+      <div class="flex justify-center items-center gap-4 mb-12">
+        <span class="text-base-content font-semibold">Monthly</span>
+        <input type="checkbox" class="toggle toggle-primary" id="pricing-toggle" />
+        <div class="text-base-content font-semibold">Annual <span id="yearly-discount" class="badge badge-success">Save 10%</span></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Drawbridge Plan -->
+        <div class="card card-bordered bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="card-body">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16h18M4 16V8a1 1 0 011-1h14a1 1 0 011 1v8M4 16l4-4 4 4 4-4 4 4" />
+              </svg>
+
+              <h2 class="text-2xl font-bold text-base-content">Drawbridge</h2>
+            </div>
+            <p class="text-sm text-base-content/60 mb-4">Essential defense for startups</p>
+            
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-bold text-base-content">
+                  <span class="pricing-monthly">$49</span>
+                  <span class="pricing-annual hidden">$529</span>
+                </span>
+                <span class="text-base-content/70">/
+                  <span class="billing-period">month</span>
+                </span>
+              </div>
+              <p class="text-xs text-base-content/60 mt-1">
+                <span class="billing-detail-monthly">Billed monthly</span>
+                <span class="billing-detail-annual hidden">Billed annually ($44/mo)</span>
+              </p>
+            </div>
+
+            <!-- Request Limit Highlight -->
+            <div class="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+              <div class="flex items-center gap-2 justify-center mb-3">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span class="text-lg font-bold text-primary">3,000</span>
+                <span class="text-sm text-base-content/70">req/hour</span>
+              </div>
+            </div>
+
+            <div class="text-sm text-base-content/70 mb-4">
+              <ul class="mt-2 space-y-1 text-xs">
+                <li>
+                  <div class="flex items-center gap-2">
+                    <span>📈</span>
+                    <span>Burst up to <strong class="text-base-content">200 req/min</strong></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center gap-2">
+                    <span>📊</span>
+                    <span><strong class="text-base-content">72K requests/day</strong> sustained</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center gap-2">
+                    <span>📅</span>
+                    <span><strong class="text-base-content">2.2M requests/month</strong></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <a href={~p"/users/register"} class="btn btn-outline btn-primary w-full mt-auto">Start with Drawbridge</a>
+          </div>
+        </div>
+
+        <!-- Outpost Plan (Most Popular) -->
+        <div class="card card-bordered bg-base-100 shadow-xl hover:shadow-2xl transition-shadow border-primary border-2 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+            <span class="badge badge-primary badge-lg">Most Popular</span>
+          </div>
+          <div class="card-body">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              <h2 class="text-2xl font-bold text-base-content">Outpost</h2>
+            </div>
+            <p class="text-sm text-base-content/60 mb-4">Enhanced protection for growing teams</p>
+            
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-bold text-base-content">
+                  <span class="pricing-monthly">$99</span>
+                  <span class="pricing-annual hidden">$1,069</span>
+                </span>
+                <span class="text-base-content/70">/
+                  <span class="billing-period">month</span>
+                </span>
+              </div>
+              <p class="text-xs text-base-content/60 mt-1">
+                <span class="billing-detail-monthly">Billed monthly</span>
+                <span class="billing-detail-annual hidden">Billed annually ($89/mo)</span>
+              </p>
+            </div>
+
+            <!-- Request Limit Highlight -->
+            <div class="bg-primary/10 border border-primary/30 rounded-lg p-4 mb-6">
+              <div class="flex items-center gap-2 justify-center mb-3">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span class="text-lg font-bold text-primary">10,000</span>
+                <span class="text-sm text-base-content/70">req/hour</span>
+              </div>
+            </div>
+
+            <div class="text-sm text-base-content/70 mb-4">
+              <ul class="mt-2 space-y-1 text-xs">
+                <li>
+                <div class="flex items-center gap-2">
+                  <span>📈</span>
+                  <span>Burst up to <strong class="text-base-content">668 req/min</strong></span>
+                </div>
+                </li>
+                <li>
+                <div class="flex items-center gap-2">
+                  <span>📊</span>
+                  <span><strong class="text-base-content">240K requests/day</strong> sustained</span>
+                </div>
+                </li>
+                <li>
+                <div class="flex items-center gap-2">
+                  <span>📅</span>
+                  <span><strong class="text-base-content">7.2M requests/month</strong></span>
+                </div>
+                </li>
+              </ul>
+            </div>
+
+            <a href={~p"/users/register"} class="btn btn-primary w-full mt-auto">Upgrade to Outpost</a>
+          </div>
+        </div>
+
+        <!-- Castle Plan -->
+        <div class="card card-bordered bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="card-body">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+              </svg>
+              <h2 class="text-2xl font-bold text-base-content">Castle</h2>
+            </div>
+            <p class="text-sm text-base-content/60 mb-4">Complete fortress for high-demand apps</p>
+            
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-bold text-base-content">
+                  <span class="pricing-monthly">$199</span>
+                  <span class="pricing-annual hidden">$2,149</span>
+                </span>
+                <span class="text-base-content/70">/
+                  <span class="billing-period">month</span>
+                </span>
+              </div>
+              <p class="text-xs text-base-content/60 mt-1">
+                <span class="billing-detail-monthly">Billed monthly</span>
+                <span class="billing-detail-annual hidden">Billed annually ($179/mo)</span>
+              </p>
+            </div>
+
+            <!-- Request Limit Highlight -->
+            <div class="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+              <div class="flex items-center gap-2 justify-center mb-3">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span class="text-lg font-bold text-primary">50,000</span>
+                <span class="text-sm text-base-content/70">req/hour</span>
+              </div>
+            </div>
+
+            <div class="text-sm text-base-content/70 mb-4">
+              <ul class="mt-2 space-y-1 text-xs">
+                <li>
+                  <div class="flex items-center gap-2">
+                    <span>📈</span>
+                    <span>Burst up to <strong class="text-base-content">3,334 req/min</strong></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center gap-2">
+                    <span>📊</span>
+                    <span><strong class="text-base-content">1.2M requests/day</strong> sustained</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center gap-2">
+                    <span>📅</span>
+                    <span><strong class="text-base-content">36M requests/month</strong></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <a href={~p"/users/register"} class="btn btn-outline btn-primary w-full mt-auto">Choose Castle</a>
+          </div>
+        </div>
+
+        <!-- Fortress Plan -->
+        <div class="card card-bordered bg-gradient-to-br from-base-100 to-base-200 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="card-body">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <h2 class="text-2xl font-bold text-base-content">Fortress</h2>
+            </div>
+            <p class="text-sm text-base-content/60 mb-4">Ultimate security for enterprises</p>
+            
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-bold text-base-content">Custom</span>
+              </div>
+              <p class="text-xs text-base-content/60 mt-1">Starting at $500/month</p>
+            </div>
+
+            <!-- Request Limit Highlight -->
+            <div class="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/30 rounded-lg p-4 mb-6">
+              <div class="flex items-center gap-2 justify-center mb-3">
+                <span class="text-3xl">∞</span>
+                <span class="text-sm text-base-content/70">unlimited requests</span>
+              </div>
+            </div>
+
+            <div class="text-sm text-base-content/70 mb-4">
+              <ul class="mt-2 space-y-1 text-xs">
+                <li>• On-premise deployment</li>
+                <li>• Private cloud installation</li>
+                <li>• Dedicated account manager</li>
+                <li>• Custom SLAs & support</li>
+              </ul>
+            </div>
+
+            <a href="mailto:contact@opsbloc.com" class="btn btn-outline btn-primary w-full mt-auto">Contact Sales</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<!-- Key Features Highlight -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-base-100">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-base-content mb-4">
+          Every Plan Includes
+        </h2>
+        <p class="text-lg text-base-content/70">
+          Core features that protect your applications without compromise
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Unlimited Applications -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <span class="text-3xl">∞</span>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Unlimited Applications</h3>
+          <p class="text-sm text-base-content/70">Monitor <span class="font-semibold text-base-content">as many web applications</span> as you need without <span class="font-semibold text-base-content">additional charges</span> per app.</p>
+        </div>
+
+        <!-- Uptime Monitoring -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Uptime Monitoring</h3>
+          <p class="text-sm text-base-content/70"><span class="font-semibold text-base-content">Continuous availability checks</span> ensure your apps are always accessible. Get <span class="font-semibold text-base-content">instant alerts</span> when downtime is detected.</p>
+        </div>
+
+        <!-- Real-Time Detection & Alerting -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Real-Time Detection & Alerting</h3>
+          <p class="text-sm text-base-content/70"><span class="font-semibold text-base-content">Traffic analysis and threat detection</span> happen in real-time with <span class="font-semibold text-base-content">live metrics updating</span> on your dashboard as events occur.</p>
+        </div>
+
+        <!-- Performance Analytics -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Performance Analytics</h3>
+          <p class="text-sm text-base-content/70"><span class="font-semibold text-base-content">Visualize response times</span> and error rates with <span class="font-semibold text-base-content">historical graphs</span> to identify the <span class="font-semibold text-base-content">slowest parts</span> of your application.</p>
+        </div>
+
+        <!-- Security Threat Detection -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Security Threat Detection</h3>
+          <p class="text-sm text-base-content/70"><span class="font-semibold text-base-content">Automatically detect</span> SQL injection, XSS attacks, and suspicious patterns. <span class="font-semibold text-base-content">Security insights surface instantly</span> for immediate action.</p>
+        </div>
+
+        <!-- Advanced Log Search -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Advanced Log Search</h3>
+          <p class="text-sm text-base-content/70"><span class="font-semibold text-base-content">Powerful query capabilities</span> help you find <span class="font-semibold text-base-content">security issues faster</span>, especially <span class="font-semibold text-base-content">advanced threat patterns</span> hiding in your logs.</p>
+        </div>
+
+        <!-- Proactive Alerts -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Proactive Alerts</h3>
+          <p class="text-sm text-base-content/70">Get notified via <span class="font-semibold text-base-content">email or webhooks</span> before issues escalate. <span class="font-semibold text-base-content">Customizable thresholds</span> keep you informed without noise.</p>
+        </div>
+
+        <!-- 30-Day Retention -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">30-Day Retention</h3>
+          <p class="text-sm text-base-content/70"><span class="font-semibold text-base-content">Full month of data</span> stored for <span class="font-semibold text-base-content">historical analysis</span> and debugging past issues without extra charges.</p>
+        </div>
+
+        <!-- Stress-Free Billing -->
+        <div class="flex flex-col items-start gap-3">
+          <div class="p-3 bg-primary/10 rounded-lg">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-base-content">Stress-Free Billing</h3>
+          <p class="text-sm text-base-content/70"><span class="font-semibold text-base-content">No surprise charges</span> during traffic peaks or when sending large logs. <span class="font-semibold text-base-content">Fixed monthly pricing</span> you can rely on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-base-200">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-base-content mb-4">
+          Stop Choosing Between Coverage and Cost
+        </h2>
+        <p class="text-lg text-base-content/70">
+          Opsbloc combines APM and ASM into one powerful, affordable platform
+        </p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th class="text-base">Capability</th>
+              <th class="text-base text-center">Traditional APM Tools</th>
+              <th class="text-base text-center">Security-Only ASM Tools</th>
+              <th class="text-base text-center bg-primary/5">Opsbloc (APM + ASM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Performance Monitoring -->
+            <tr>
+              <td class="font-medium">Performance Monitoring</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-base-content/60">Yes, but sampled</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-error mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-sm text-base-content/60">Not included</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">100% real-time</span>
+              </td>
+            </tr>
+
+            <!-- Security Threat Detection -->
+            <tr>
+              <td class="font-medium">Security Threat Detection</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-warning mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span class="text-sm text-base-content/60">Basic, add-on</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-base-content/60">Yes, specialized</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">OWASP-based detection</span>
+              </td>
+            </tr>
+
+            <!-- Real-Time Processing -->
+            <tr>
+              <td class="font-medium">Real-Time Processing</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-warning mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span class="text-sm text-base-content/60">Delayed metrics</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-base-content/60">Yes, alerts only</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">Instant detection & metrics</span>
+              </td>
+            </tr>
+
+            <!-- Threat Actor Identification -->
+            <tr>
+              <td class="font-medium">Threat Actor Identification</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-error mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-sm text-base-content/60">Not available</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-base-content/60">Yes, complex setup</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">Built-in IP tracking</span>
+              </td>
+            </tr>
+
+            <!-- Breach Attempt Insights -->
+            <tr>
+              <td class="font-medium">Breach Attempt Insights</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-error mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-sm text-base-content/60">Minimal</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-base-content/60">Detailed, expensive</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">OWASP categorization</span>
+              </td>
+            </tr>
+
+            <!-- Log Retention -->
+            <tr>
+              <td class="font-medium">Log Retention</td>
+              <td class="text-center text-sm text-base-content/60">7-15 days typical</td>
+              <td class="text-center text-sm text-base-content/60">30-90 days, costly</td>
+              <td class="text-center bg-primary/5">
+                <span class="badge badge-success">30 days included</span>
+              </td>
+            </tr>
+
+            <!-- Pricing Model -->
+            <tr>
+              <td class="font-medium">Pricing Model</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-error mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-sm text-base-content/60">Per GB or span</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-error mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-sm text-base-content/60">Per event/log volume</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">Fixed monthly</span>
+              </td>
+            </tr>
+
+            <!-- Surprise Bills -->
+            <tr>
+              <td class="font-medium">Surprise Bills</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-error mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-sm text-base-content/60">Common</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-error mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span class="text-sm text-base-content/60">Frequent</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">Never</span>
+              </td>
+            </tr>
+
+            <!-- Runtime Overhead -->
+            <tr>
+              <td class="font-medium">Runtime Overhead</td>
+              <td class="text-center text-sm text-base-content/60">3-5% typical</td>
+              <td class="text-center text-sm text-base-content/60">2-4% typical</td>
+              <td class="text-center bg-primary/5">
+                <span class="badge badge-success">&lt; 1% overhead</span>
+              </td>
+            </tr>
+
+            <!-- Unified Dashboard -->
+            <tr>
+              <td class="font-medium">Unified Dashboard</td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-base-content/60">Performance only</span>
+              </td>
+              <td class="text-center">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm text-base-content/60">Security only</span>
+              </td>
+              <td class="text-center bg-primary/5">
+                <svg class="w-6 h-6 text-success mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-sm font-semibold text-base-content">Performance + Security</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 text-center">
+        <p class="text-sm text-base-content/60">
+          Why pay for separate APM and ASM tools when Opsbloc gives you <span class="font-semibold text-base-content">both with better coverage</span> at a fraction of the cost?
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-base-100">
+    <div class="mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-base-content mb-4">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" checked />
+          <div class="collapse-title text-lg font-semibold">
+            Why don't you charge per data volume like other monitoring tools?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              We focus on security and performance monitoring by scanning through all request content and bodies to detect threats—but we only store what matters: security threats, performance metrics, and essential metadata. Unlike traditional APM tools that store massive raw POST bodies indiscriminately, our selective approach allows us to offer unlimited applications and fixed pricing. You'll never get a surprise bill because your traffic spiked—we charge based on throughput capacity (requests/hour), not data volume.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            How do hourly log ingestion limits work?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              Our plans feature generous pro-rata throttling, calculated per minute to smoothly handle your app's natural traffic variations—allowing bursts up to twice (100% over) the average hourly rate for that minute. For example, if you're on the Drawbridge plan (3,000 req/hour ≈ 100 req/min), you can handle bursts up to 200 requests in any given minute. This flexibility ensures you can handle traffic spikes without immediately hitting limits. If you consistently exceed your hourly limit, you'll receive alerts and can easily upgrade to a higher tier for increased capacity.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            What counts as a "request" in my hourly limit?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              Every HTTP request to your monitored applications counts as one request. This includes API calls, page loads, and AJAX requests. Our system tracks requests in real-time and you'll receive alerts if you're approaching your plan's hourly limit, giving you time to upgrade if needed.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            Can I export my logs?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              Yes! You have several options to export your monitoring data and logs. You can export filtered log data via CSV through the dashboard, use our API to programmatically retrieve logs, or integrate with webhooks for real-time log streaming to your own systems. Unlike traditional APM tools that hook into your runtime and add significant overhead (3-5%), we use asynchronous HTTPS log ingestion which adds far less than 1% overhead in realistic scenarios. This means you get comprehensive monitoring without impacting your application's performance.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            Can I monitor unlimited applications on any plan?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              Yes! All plans include unlimited web applications. Whether you have 1 app or 100 apps, you only pay based on your total request throughput across all applications. This makes Opsbloc perfect for agencies, SaaS platforms, and growing businesses managing multiple projects.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            What happens if I exceed my hourly request limit?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              We'll send you alerts as you approach your limit. If you exceed it briefly, we won't cut off your monitoring—we'll continue tracking for a grace period and notify you to upgrade. We believe in keeping your apps protected, not penalizing traffic spikes. However, consistent overages will require upgrading to a higher tier.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            How does 30-day data retention work?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              All your monitoring data, logs, and analytics are stored for 30 days on every plan. This gives you a full month to investigate incidents, analyze trends, and debug issues. After 30 days, older data is automatically archived. Need longer retention? Contact us about custom Fortress plans with extended retention options.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            What's included in the Fortress plan?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              The Fortress plan is fully customizable for enterprise needs with unlimited request throughput. You can choose between on-premise deployment (installed on your own infrastructure) or private cloud installation (dedicated cloud environment). The plan includes everything from Castle plus dedicated account management, custom SLAs, priority support, and tailored configurations to meet your specific security, compliance, and scalability requirements. Contact our sales team to discuss your needs and get a custom quote.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            Do you offer a free trial?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">
+              Yes! Start with any plan and experience real-time monitoring, security detection, and log insights risk-free for 14 days. No credit card required to start your trial. See for yourself how Opsbloc can protect your applications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-base-200">
+    <div class="mx-auto max-w-4xl text-center">
+      <div class="card bg-base-100 shadow-lg p-8">
+        <div class="card-body">
+          <svg class="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
+          </svg> 
+          <p class="text-xl font-medium mb-6 font-bold italic">
+            "Opsbloc transformed how we safeguard our busy SaaS platform. Spotting attacks in the moment, uncovering slowdowns right away, and enabling quick log investigations on every alert. Everything centralized for effortless oversight, keeping our ops smooth and scalable."
+          </p>
+          <div class="flex items-center justify-center gap-3">
+            <img src="images/jeremy_crowdcast.jpeg" alt="Crowd Cast application" class="w-15 h-13 rounded-full object-cover object-center">
+            <div class="text-left">
+              <p class="text-base-content font-semibold">Jeremy</p>
+              <p class="text-base-content/70 text-sm">CTO, Crowd Cast Ltd</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 to-primary/5">
+    <div class="mx-auto max-w-4xl text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-base-content mb-6">
+        Ready to Fortify Your Applications?
+      </h2>
+      <p class="text-lg text-base-content/70 mb-8">
+        Start monitoring in minutes. No credit card required for your 14-day free trial.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href={~p"/users/register"} class="btn btn-primary btn-lg">
+          Start Free Trial
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-base-100">
+    <div class="mx-auto max-w-5xl text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-base-content mb-12">
+        Any questions?
+      </h2>
+      <div class="card bg-base-100 shadow-lg max-w-md mx-auto">
+        <div class="card-body">
+          <form action="https://inputbloc.com/submit/VGDZYs5" method="post">
+            <div class="form-control mb-4">
+              <input type="text" name="name" placeholder="John Doe" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control mb-4">
+              <input type="email" name="email" placeholder="email@example.com" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control mb-4">
+              <textarea name="message" placeholder="Your message..." class="textarea textarea-bordered w-full" rows="4" required></textarea>
+            </div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAABddLv5EMXnFrVMr"></div>
+            <button type="submit" class="btn btn-primary w-full">Talk to Sales</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript for yearly/monthly toggle -->
+  <script>
+    const toggle = document.getElementById('pricing-toggle');
+    const yearlyDiscount = document.getElementById('yearly-discount');
+
+    toggle.addEventListener('change', () => {
+      const isYearly = toggle.checked;
+      
+      // Toggle visibility of monthly/annual prices
+      document.querySelectorAll('.pricing-monthly').forEach(el => {
+        el.classList.toggle('hidden', isYearly);
+      });
+      document.querySelectorAll('.pricing-annual').forEach(el => {
+        el.classList.toggle('hidden', !isYearly);
+      });
+      
+      // Update billing period text
+      document.querySelectorAll('.billing-period').forEach(el => {
+        el.textContent = isYearly ? 'year' : 'month';
+      });
+      
+      // Update billing details
+      document.querySelectorAll('.billing-detail-monthly').forEach(el => {
+        el.classList.toggle('hidden', isYearly);
+      });
+      document.querySelectorAll('.billing-detail-annual').forEach(el => {
+        el.classList.toggle('hidden', !isYearly);
+      });
+    });
+  </script>
+</Layouts.site>

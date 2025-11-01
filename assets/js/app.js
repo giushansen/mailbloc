@@ -22,14 +22,23 @@ import "phoenix_html"
 // Establish Phoenix Socket and LiveView configuration.
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
-import {hooks as colocatedHooks} from "phoenix-colocated/mailbloc"
 import topbar from "../vendor/topbar"
+
+import {hooks as colocatedHooks} from "phoenix-colocated/mailbloc"
+import AutoClearFlash from "./hooks/auto_clear_flash"
+import CopyToClipboard from "./hooks/copy_to_clipboard"
+
+const Hooks = {
+  ...colocatedHooks,
+  AutoClearFlash,
+  CopyToClipboard
+}
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},
-  hooks: {...colocatedHooks},
+  hooks: Hooks,
 })
 
 // Show progress bar on live navigation and form submits

@@ -1,0 +1,663 @@
+<Layouts.site flash={@flash} current_scope={@current_scope}>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Opsbloc vs Datadog Comparison",
+    "description": "Compare Opsbloc and Datadog for web application monitoring. See pricing, features, and which tool is best for SMBs.",
+    "url": "https://opsbloc.com/vs/datadog"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProductComparison",
+    "name": "Opsbloc vs Datadog",
+    "description": "Detailed comparison of Opsbloc and Datadog monitoring platforms",
+    "productA": {
+      "@type": "SoftwareApplication",
+      "name": "Opsbloc",
+      "url": "https://opsbloc.com",
+      "description": "Real-time application resilience monitoring for web apps - combining performance and security monitoring in one simple tool",
+      "applicationCategory": "Monitoring & Observability",
+      "operatingSystem": "Cloud-based",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "49",
+        "highPrice": "199",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "49-199",
+          "priceCurrency": "USD",
+          "billingDuration": "P1M"
+        }
+      },
+      "featureList": [
+        "Application Performance Monitoring",
+        "Application Security Monitoring (OWASP-focused)",
+        "Real-time Alerting (Email & Webhook)",
+        "Log Search & Analysis",
+        "30-day data retention included",
+        "Unlimited web applications"
+      ]
+    },
+    "productB": {
+      "@type": "SoftwareApplication",
+      "name": "Datadog",
+      "url": "https://www.datadoghq.com",
+      "description": "Cloud-based observability and monitoring platform for infrastructure, applications, and logs",
+      "applicationCategory": "Monitoring & Observability",
+      "operatingSystem": "Cloud-based",
+      "featureList": [
+        "Infrastructure Monitoring",
+        "Application Performance Monitoring",
+        "Log Management",
+        "Security Monitoring (separate product)",
+        "Synthetic Monitoring",
+        "Network Performance Monitoring"
+      ]
+    },
+    "reviewAspect": [
+      "Pricing & Cost Predictability",
+      "Application Performance Monitoring",
+      "Security Monitoring (OWASP)",
+      "Ease of Setup & Use",
+      "Alerting Simplicity",
+      "Target Audience (SMB vs Enterprise)"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Opsbloc cheaper than Datadog?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, significantly. Opsbloc pricing is transparent and predictable at $49-$199/month for unlimited web apps with all features included. Datadog starts at $15/host/month but quickly escalates to $100-$300+ per host when you add APM, security, logs, and other features. For a typical SMB monitoring 5-10 hosts, Opsbloc can save $500-$2,000+ monthly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Opsbloc have security monitoring like Datadog?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, and it's better integrated. Opsbloc includes OWASP-focused application security monitoring built-in at no extra cost. Datadog requires a separate Cloud Security Management product with additional per-host fees. Opsbloc's unified approach means performance and security data share the same timeline, making it easier to correlate issues."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which is easier to set up: Opsbloc or Datadog?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Opsbloc is significantly simpler. Setup takes 5-10 minutes with a simple code snippet or HTTP endpoint. Datadog requires agent installation per host, configuration of multiple products (APM, logs, security), and navigating complex pricing tiers. Teams report spending hours or days on Datadog setup vs. minutes with Opsbloc."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Opsbloc replace Datadog for my SMB web application?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For web application monitoring focused on performance and security, yes. Opsbloc excels at real-time application resilience monitoring with integrated security. However, if you need infrastructure monitoring (servers, containers, cloud resources) or very complex distributed tracing across 50+ microservices, Datadog may offer more breadth. Most SMBs find Opsbloc provides everything they need at a fraction of the cost."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <section class="hero bg-base-200 py-16">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-base-content mb-6">
+        Opsbloc vs Datadog: A Smarter, Affordable Alternative for SMB Web App Monitoring
+      </h1>
+      <p class="text-base sm:text-lg text-base-content/70 mb-8 max-w-3xl mx-auto">
+        Compare Opsbloc and Datadog across pricing, performance monitoring, security features, and ease of use. 
+        Discover why SMBs choose Opsbloc for transparent pricing and integrated application resilience monitoring.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/users/register" class="btn btn-primary btn-lg">
+          Try Opsbloc Free for 14 Days
+        </a>
+        <a href="/pricing" class="btn btn-outline btn-lg">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- At a Glance Comparison Section -->
+  <section class="py-16 bg-base-100">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-8 text-center">
+        Opsbloc vs Datadog at a Glance
+      </h2>
+      
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th class="text-left">Feature</th>
+              <th class="text-center">Opsbloc</th>
+              <th class="text-center">Datadog</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-semibold">Starting Price</td>
+              <td class="text-center">$49/month</td>
+              <td class="text-center">$15/host/month (base)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Realistic Monthly Cost (5 hosts)</td>
+              <td class="text-center">$49-$99</td>
+              <td class="text-center">$500-$1,500+</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Application Performance Monitoring</td>
+              <td class="text-center">✅ Included</td>
+              <td class="text-center">✅ +$31-$40/host</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Security Monitoring (OWASP)</td>
+              <td class="text-center">✅ Built-in & Realtime</td>
+              <td class="text-center">⚠️ Separate product + cost</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Log Retention</td>
+              <td class="text-center">30 days included</td>
+              <td class="text-center">15 days (expensive to extend)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Alerting</td>
+              <td class="text-center">Simple, no alert fatigue</td>
+              <td class="text-center">Powerful but complex</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Setup Time</td>
+              <td class="text-center">5-10 minutes</td>
+              <td class="text-center">Hours to days</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Target Audience</td>
+              <td class="text-center">SMBs, startups, dev teams</td>
+              <td class="text-center">Enterprise, large teams</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Pricing Model</td>
+              <td class="text-center">Simple, transparent, predictable</td>
+              <td class="text-center">Complex, usage-based, unpredictable</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Comparison Section -->
+  <section class="py-16 bg-base-200">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-12 text-center">
+        Detailed Comparison: Features, Pricing & More
+      </h2>
+
+      <!-- Pricing Comparison -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">💰 Pricing: Transparent vs Unpredictable</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-primary mb-3">Opsbloc Pricing</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ <strong>$49-$199/month</strong> all-inclusive</li>
+                <li>✅ Unlimited web applications</li>
+                <li>✅ All features included (no hidden costs)</li>
+                <li>✅ 30-day retention on all plans</li>
+                <li>✅ No per-host, per-user, or per-GB fees</li>
+                <li>✅ Predictable monthly budget</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-secondary mb-3">Datadog Pricing</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>⚠️ <strong>$15/host/month</strong> (infrastructure only)</li>
+                <li>⚠️ APM: <strong>+$31-$40/host/month</strong></li>
+                <li>⚠️ Logs: <strong>+$0.10/GB ingested + storage</strong></li>
+                <li>⚠️ Security: <strong>Separate product pricing</strong></li>
+                <li>⚠️ Typical SMB cost: <strong>$500-$2,000+/month</strong></li>
+                <li>❌ Unpredictable monthly costs with usage spikes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-info mt-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <p><strong>Cost Comparison Example:</strong> A startup monitoring 5 hosts with APM, logs, and basic security would pay $49-$99/month with Opsbloc vs. $750-$1,500+/month with Datadog — <strong>saving $7,000-$17,000 annually</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Monitoring -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">📊 Application Performance Monitoring</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-bold text-primary mb-3">Opsbloc APM</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>✅ Real-time request metrics & errors</li>
+              <li>✅ Average response time and p95 percentile</li>
+              <li>✅ Error tracking with request details</li>
+              <li>✅ Request volume & rate monitoring</li>
+              <li>✅ Single unified dashboard view</li>
+              <li>✅ Simple integration (1 code snippet)</li>
+              <li>✅ Near-zero performance overhead</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold text-secondary mb-3">Datadog APM</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>✅ Comprehensive distributed tracing</li>
+              <li>✅ Service maps & dependencies</li>
+              <li>✅ Deep profiling & flame graphs</li>
+              <li>✅ Custom instrumentation options</li>
+              <li>⚠️ Requires agent installation per host</li>
+              <li>⚠️ Complex setup & configuration</li>
+              <li>⚠️ Can impact application performance</li>
+              <li>❌ Expensive: +$31-40/host/month</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="mt-6 text-base-content/70">
+          <strong>Verdict:</strong> Datadog offers more advanced features for complex microservices architectures, but Opsbloc provides everything most SMB web applications need with dramatically simpler setup and lower cost.
+        </p>
+      </div>
+
+      <!-- Security Monitoring -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">🔒 Security Monitoring</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-bold text-primary mb-3">Opsbloc Security</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>✅ <strong>Built-in OWASP-focused monitoring</strong></li>
+              <li>✅ SQL injection attempt detection</li>
+              <li>✅ XSS attack pattern identification</li>
+              <li>✅ Suspicious request analysis</li>
+              <li>✅ Security events on same timeline as performance</li>
+              <li>✅ No extra cost — included in all plans</li>
+              <li>✅ Real-time security alerts</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold text-secondary mb-3">Datadog Security</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>⚠️ <strong>Separate product:</strong> Cloud Security Management</li>
+              <li>⚠️ Additional per-host fees required</li>
+              <li>✅ Infrastructure vulnerability scanning</li>
+              <li>✅ Compliance monitoring (PCI, HIPAA)</li>
+              <li>✅ Threat detection & investigation</li>
+              <li>❌ Application-level OWASP monitoring limited</li>
+              <li>❌ Requires separate setup & learning curve</li>
+              <li>❌ Significantly increases total cost</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="alert alert-warning mt-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <div>
+            <p><strong>Key Difference:</strong> Opsbloc integrates security monitoring directly with performance data, making it easy to correlate security events with application behavior. Datadog treats security as a separate concern, requiring additional setup and cost.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ease of Use -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">🎯 Ease of Setup & Use</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-bold text-primary mb-3">Opsbloc Setup</h4>
+            <ol class="list-decimal list-inside space-y-2 text-base-content/80">
+              <li>Sign up (2 minutes)</li>
+              <li>Add code snippet to your app (3 minutes)</li>
+              <li>Start monitoring (instant)</li>
+            </ol>
+            <p class="mt-4 text-base-content/80">
+              <strong>Total time:</strong> 5-10 minutes<br/>
+              <strong>Learning curve:</strong> Minimal — intuitive dashboards
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold text-secondary mb-3">Datadog Setup</h4>
+            <ol class="list-decimal list-inside space-y-2 text-base-content/80">
+              <li>Create account & configure organization</li>
+              <li>Install agent on each host</li>
+              <li>Configure APM library per application</li>
+              <li>Set up log forwarding</li>
+              <li>Configure dashboards & alerts</li>
+              <li>Add security modules (separate setup)</li>
+            </ol>
+            <p class="mt-4 text-base-content/80">
+              <strong>Total time:</strong> Hours to days<br/>
+              <strong>Learning curve:</strong> Steep — extensive documentation required
+            </p>
+          </div>
+        </div>
+
+        <p class="mt-6 text-base-content/70">
+          <strong>User Experience:</strong> Opsbloc provides a single, unified dashboard for performance, security, logs, and alerts with a common time window. Datadog offers hundreds of pre-built dashboards and extensive customization — powerful but overwhelming for small teams.
+        </p>
+      </div>
+
+      <!-- Alerting -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">🔔 Alerting & Notifications</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-bold text-primary mb-3">Opsbloc Alerts</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>✅ Simple, customizable real-time alerts</li>
+              <li>✅ Email notifications</li>
+              <li>✅ Webhook integration (Slack, Discord, etc.)</li>
+              <li>✅ No alert fatigue — intelligent thresholds</li>
+              <li>✅ Easy to configure in minutes</li>
+              <li>⚠️ No direct SMS alerting</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold text-secondary mb-3">Datadog Alerts</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>✅ Advanced alerting with ML-powered anomaly detection</li>
+              <li>✅ Multi-channel: Email, SMS, PagerDuty, Slack, etc.</li>
+              <li>✅ Complex alert conditions & thresholds</li>
+              <li>✅ Alert dependencies & escalation policies</li>
+              <li>⚠️ Can be overwhelming — alert fatigue common</li>
+              <li>⚠️ Requires significant time to configure properly</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="mt-6 text-base-content/70">
+          <strong>Best for:</strong> Opsbloc alerts are ideal for teams wanting simple, effective notifications without drowning in complexity. Datadog suits teams needing sophisticated alerting workflows across multiple tools and stakeholders.
+        </p>
+      </div>
+
+      <!-- Log Management -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">📝 Log Management & Retention</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-lg font-bold text-primary mb-3">Opsbloc Logs</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>✅ <strong>30-day retention included</strong> (all plans)</li>
+              <li>✅ Simple log search interface</li>
+              <li>✅ Filter by time, level, content</li>
+              <li>✅ Correlated with performance & security events</li>
+              <li>✅ No per-GB ingestion fees</li>
+              <li>⚠️ No extended retention add-ons</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold text-secondary mb-3">Datadog Logs</h4>
+            <ul class="space-y-2 text-base-content/80">
+              <li>⚠️ <strong>15-day retention default</strong></li>
+              <li>⚠️ <strong>$0.10/GB ingested</strong> + storage fees</li>
+              <li>⚠️ Extended retention: expensive</li>
+              <li>✅ Advanced log analytics & patterns</li>
+              <li>✅ Log-based metrics & monitors</li>
+              <li>✅ Powerful querying & aggregation</li>
+              <li>❌ Costs can spiral with high log volumes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="alert alert-info mt-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <p><strong>Cost Example:</strong> An app generating 50GB of logs per month would cost $0 extra with Opsbloc (30 days included) vs. $5/month ingestion + storage fees with Datadog. At 500GB/month, Datadog costs $50+ extra monthly just for logs.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Audience -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">👥 Who Should Use Each Platform?</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-primary/10 border border-primary/30">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-primary mb-3">Choose Opsbloc if you:</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ Run web applications or SaaS products</li>
+                <li>✅ Are a startup, SMB, or small dev team (1-10 people)</li>
+                <li>✅ Need integrated performance + security monitoring</li>
+                <li>✅ Want transparent, predictable pricing</li>
+                <li>✅ Value simplicity and quick setup</li>
+                <li>✅ Need OWASP-focused security built-in</li>
+                <li>✅ Want to avoid alert fatigue</li>
+                <li>✅ Monitor 1-20 web applications</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-secondary/10 border border-secondary/30">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-secondary mb-3">Choose Datadog if you:</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ Monitor complex infrastructure (servers, containers, K8s)</li>
+                <li>✅ Are an enterprise with large DevOps teams (50+ people)</li>
+                <li>✅ Need monitoring across 100+ hosts/services</li>
+                <li>✅ Require extensive custom dashboards & analytics</li>
+                <li>✅ Have dedicated staff to manage monitoring tools</li>
+                <li>✅ Need advanced features like distributed tracing across 50+ microservices</li>
+                <li>✅ Can handle complex pricing and higher costs</li>
+                <li>✅ Require extensive integrations with enterprise tools</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Will Bloc Quote Section -->
+  <section class="py-12 bg-base-100 border-b border-base-300">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center gap-6 bg-base-200 p-6 rounded-lg">
+        <div class="flex-shrink-0">
+          <img src="/images/will_profile_ai.webp" alt="Will Bloc, Founder of Opsbloc" class="w-24 h-24 rounded-full border-4 border-primary" />
+        </div>
+        <div class="flex-1">
+          <blockquote class="text-base-content/80 italic mb-2">
+            "I have asked Claude AI to help me get the comparison details. Please let me know if you believe some comparisons are not accurate."
+          </blockquote>
+          <p class="text-sm text-base-content/60">
+            <strong>Will Bloc</strong> — Founder, Opsbloc
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decision Guide Section -->
+  <section class="py-16 bg-base-100">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-8 text-center">
+        Which One is Right for You?
+      </h2>
+      
+      <div class="prose max-w-none text-base-content/80">
+        <p class="text-lg mb-6">
+          The choice between Opsbloc and Datadog ultimately depends on your team size, budget, and monitoring needs:
+        </p>
+
+        <div class="bg-primary/10 border-l-4 border-primary p-6 mb-6">
+          <p class="text-base-content font-semibold mb-3">Choose Opsbloc for web application monitoring when:</p>
+          <ul class="space-y-2">
+            <li>You need <strong>integrated performance and security monitoring</strong> in one simple tool</li>
+            <li>You want <strong>transparent, predictable pricing</strong> without surprise costs</li>
+            <li>Your team values <strong>simplicity over complexity</strong></li>
+            <li>You're monitoring <strong>web applications specifically</strong> (not broad infrastructure)</li>
+            <li>You want <strong>OWASP-focused security</strong> monitoring included by default</li>
+            <li>Your budget is <strong>$50-$200/month</strong> and you want to keep it there</li>
+          </ul>
+        </div>
+
+        <div class="bg-secondary/10 border-l-4 border-secondary p-6 mb-6">
+          <p class="text-base-content font-semibold mb-3">Choose Datadog for enterprise infrastructure when:</p>
+          <ul class="space-y-2">
+            <li>You need to monitor <strong>diverse infrastructure</strong>: servers, containers, databases, networks</li>
+            <li>You have a <strong>large DevOps team</strong> dedicated to observability</li>
+            <li>You require <strong>deep distributed tracing</strong> across complex microservices</li>
+            <li>Your budget supports <strong>$1,000-$5,000+/month</strong> for monitoring</li>
+            <li>You need <strong>extensive third-party integrations</strong> and custom analytics</li>
+            <li>You have the time and resources to configure and maintain complex monitoring</li>
+          </ul>
+        </div>
+
+        <p class="text-lg">
+          <strong>For most SMBs and startups focused on web application monitoring</strong>, Opsbloc provides better value, 
+          simpler workflows, and more integrated security monitoring — at 5-10× lower cost than Datadog.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-base-200">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-8 text-center">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="space-y-4">
+        <div class="collapse collapse-plus bg-base-100">
+          <input type="radio" name="faq-accordion" checked="checked" />
+          <div class="collapse-title text-xl font-medium">
+            Is Opsbloc cheaper than Datadog?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              Yes, significantly. Opsbloc pricing is transparent and predictable at <strong>$49-$199/month</strong> for unlimited web apps with all features included. 
+              Datadog starts at $15/host/month but quickly escalates to <strong>$100-$300+ per host</strong> when you add APM, security, logs, and other features. 
+              For a typical SMB monitoring 5-10 hosts, Opsbloc can save <strong>$500-$2,000+ monthly</strong>, or <strong>$6,000-$24,000 annually</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-100">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-xl font-medium">
+            Does Opsbloc have security monitoring like Datadog?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              Yes, and it's better integrated for web applications. Opsbloc includes <strong>OWASP-focused application security monitoring</strong> built-in at no extra cost, 
+              detecting SQL injection attempts, XSS attacks, and suspicious requests. Datadog requires a separate Cloud Security Management product with additional per-host fees. 
+              Opsbloc's unified approach means performance and security data share the same timeline, making it easier to correlate issues.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-100">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-xl font-medium">
+            Which is easier to set up: Opsbloc or Datadog?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              Opsbloc is significantly simpler. Setup takes <strong>5-10 minutes</strong> with a simple code snippet or HTTP endpoint. 
+              Datadog requires agent installation per host, configuration of multiple products (APM, logs, security), and navigating complex pricing tiers. 
+              Teams report spending <strong>hours or days</strong> on Datadog setup vs. minutes with Opsbloc. Opsbloc's single unified dashboard also means 
+              less learning curve for team members.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-100">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-xl font-medium">
+            Can Opsbloc replace Datadog for my SMB web application?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              For web application monitoring focused on performance and security, <strong>yes, absolutely</strong>. Opsbloc excels at real-time application resilience 
+              monitoring with integrated OWASP security. However, if you need infrastructure monitoring (servers, containers, cloud resources) or very complex 
+              distributed tracing across 50+ microservices, Datadog may offer more breadth. Most SMBs find Opsbloc provides everything they need for web app 
+              monitoring at a fraction of the cost.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-100">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-xl font-medium">
+            What if I need more advanced features later?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              Opsbloc is designed to grow with your web application. If you eventually need infrastructure monitoring beyond web apps, you can add targeted tools 
+              alongside Opsbloc. Many teams use Opsbloc for application monitoring while using simpler, cheaper tools for basic server metrics. This hybrid approach 
+              still costs far less than Datadog while giving you the best of both worlds.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="py-20 bg-primary/10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-base-content mb-6">
+        Ready to Save Thousands on Web App Monitoring?
+      </h2>
+      <p class="text-lg text-base-content/70 mb-8 max-w-2xl mx-auto">
+        Join SMBs and startups who switched from Datadog to Opsbloc and saved $500-$2,000+ monthly while getting 
+        better integrated security monitoring and simpler workflows.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/users/register" class="btn btn-primary btn-lg">
+          Try Opsbloc Free for 14 Days
+        </a>
+        <a href="/pricing" class="btn btn-outline btn-lg">
+          See Transparent Pricing
+        </a>
+      </div>
+      <p class="text-sm text-base-content/60 mt-6">
+        No credit card required • Setup in 5 minutes • Cancel anytime
+      </p>
+    </div>
+  </section>
+
+</Layouts.site>

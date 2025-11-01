@@ -21,6 +21,15 @@ defmodule MailblocWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/pricing", PageController, :pricing
+    get "/help", PageController, :help
+    get "/privacy", PageController, :privacy
+    get "/terms", PageController, :terms
+
+    get "/vs", PageController, :vs
+    get "/vs/datadog", PageController, :vs_datadog
+
+    get "/not-found", NotFoundController, :show
   end
 
   # Other scopes may use custom stacks.
@@ -52,6 +61,8 @@ defmodule MailblocWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{MailblocWeb.UserAuth, :require_authenticated}] do
+      live "/welcome", UserLive.Welcome
+
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
     end
@@ -71,5 +82,12 @@ defmodule MailblocWeb.Router do
 
     post "/users/log-in", UserSessionController, :create
     delete "/users/log-out", UserSessionController, :delete
+  end
+
+  # Catch-all route for unmatched routes
+  scope "/", MailblocWeb do
+    pipe_through :browser
+
+    match :*, "/*path", NotFoundController, :show
   end
 end
