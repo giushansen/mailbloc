@@ -262,7 +262,7 @@ defmodule MailblocWeb.UserAuth do
     ~p"/users/settings"
   end
 
-  def signed_in_path(_), do: ~p"/"
+  def signed_in_path(_), do: ~p"/welcome"
 
   @doc """
   Plug for routes that require the user to be authenticated.

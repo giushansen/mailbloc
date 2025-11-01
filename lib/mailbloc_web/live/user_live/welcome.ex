@@ -3,8 +3,6 @@ defmodule MailblocWeb.UserLive.Welcome do
 
   on_mount {MailblocWeb.UserAuth, :require_sudo_mode}
 
-  alias Mailbloc.Accounts
-
   @impl true
   def render(assigns) do
     ~H"""
