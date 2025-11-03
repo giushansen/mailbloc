@@ -10,8 +10,25 @@ defmodule Mailbloc.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :utc_datetime
     field :authenticated_at, :utc_datetime, virtual: true
+    field :api_token, :string
 
     timestamps(type: :utc_datetime)
+  end
+
+  @doc """
+  A user changeset for registration and basic operations.
+  Automatically generates api_token for new users.
+  """
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:email, :hashed_password, :confirmed_at])
+    |> validate_required([:email])
+    |> validate_format(:email, ~r/^[^@,;\s]+@[^@,;\s]+$/,
+      message: "must have the @ sign and no spaces"
+    )
+    |> validate_length(:email, max: 160)
+    |> unique_constraint(:email)
+    |> maybe_generate_token()
   end
 
   @doc """
@@ -29,6 +46,7 @@ defmodule Mailbloc.Accounts.User do
     user
     |> cast(attrs, [:email])
     |> validate_email(opts)
+    |> maybe_generate_token()
   end
 
   defp validate_email(changeset, opts) do
@@ -55,6 +73,13 @@ defmodule Mailbloc.Accounts.User do
       add_error(changeset, :email, "did not change")
     else
       changeset
+    end
+  end
+
+  defp maybe_generate_token(changeset) do
+    case get_field(changeset, :api_token) do
+      nil -> put_change(changeset, :api_token, generate_api_token())
+      _ -> changeset
     end
   end
 
@@ -130,5 +155,19 @@ defmodule Mailbloc.Accounts.User do
   def valid_password?(_, _) do
     Bcrypt.no_user_verify()
     false
+  end
+
+  @doc """
+  Generates a secure API token for the user.
+  """
+  def generate_api_token do
+    :crypto.strong_rand_bytes(32) |> Base.encode16(case: :lower)
+  end
+
+  @doc """
+  Changeset for regenerating API token.
+  """
+  def regenerate_api_token_changeset(user) do
+    change(user, api_token: generate_api_token())
   end
 end

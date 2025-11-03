@@ -80,6 +80,21 @@ defmodule Mailbloc.Accounts do
     |> Repo.insert()
   end
 
+  @doc """
+  Regenerates the API token for a user.
+
+  ## Examples
+
+      iex> regenerate_api_token(user)
+      {:ok, %User{}}
+
+  """
+  def regenerate_api_token(%User{} = user) do
+    user
+    |> User.regenerate_api_token_changeset()
+    |> Repo.update()
+  end
+
   ## Settings
 
   @doc """

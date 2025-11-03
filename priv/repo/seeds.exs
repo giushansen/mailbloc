@@ -12,7 +12,7 @@
 alias Mailbloc.Repo
 alias Mailbloc.Accounts.User
 
-# Delete existing data (including alerts)
+# Delete existing data
 IO.puts("🧹 Cleaning up existing data...")
 Repo.delete_all(User)
 IO.puts("✅ Cleanup complete\n")
@@ -21,15 +21,21 @@ IO.puts("✅ Cleanup complete\n")
 password = "Password_123456"
 hashed_password = Bcrypt.hash_pwd_salt(password)
 
-# Create 4 users with different timezones and "castle" plan
+# Create user using standard Phoenix changeset pattern
 IO.puts("👥 Creating user")
 email = "seed@example.com"
 
-Repo.insert!(%User{
-  email: email,
-  hashed_password: hashed_password,
-  confirmed_at: DateTime.truncate(DateTime.utc_now(), :second)
-})
+user =
+  %User{}
+  |> User.changeset(%{
+    email: email,
+    hashed_password: hashed_password,
+    confirmed_at: DateTime.truncate(DateTime.utc_now(), :second)
+  })
+  |> Repo.insert!()
 
-IO.puts("\n✅ User created successfully\n")
-IO.puts("=========================\n")
+IO.puts("\n✅ User created successfully")
+IO.puts("   Email: #{email}")
+IO.puts("   Password: #{password}")
+IO.puts("   API Token: #{user.api_token}")
+IO.puts("\n=========================\n")
