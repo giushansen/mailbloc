@@ -122,7 +122,7 @@ defmodule Mailbloc.DNS.MXResolver do
       domain,
       :in,
       :mx,
-      nameservers: [dns_server],
+      nameservers: [{dns_server, 53}],
       timeout: @dns_timeout
     )
 
