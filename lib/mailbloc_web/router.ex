@@ -17,6 +17,12 @@ defmodule MailblocWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", MailblocWeb.API do
+    pipe_through :api
+
+    get "/check", CheckController, :check
+  end
+
   scope "/", MailblocWeb do
     pipe_through :browser
 

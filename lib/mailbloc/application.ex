@@ -17,7 +17,12 @@ defmodule Mailbloc.Application do
       # Start a worker by calling: Mailbloc.Worker.start_link(arg)
       # {Mailbloc.Worker, arg},
       # Start to serve requests, typically the last entry
-      MailblocWeb.Endpoint
+      MailblocWeb.Endpoint,
+      # DNS Resolver with rate limiting (creates MX cache)
+      Mailbloc.DNS.MXResolver,
+      Mailbloc.IPMatcher,
+      # Blocklist Loader (creates all ETS tables, loads data, updates daily)
+      Mailbloc.BlocklistLoader
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
