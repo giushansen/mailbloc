@@ -18,11 +18,11 @@ defmodule Mailbloc.Application do
       # {Mailbloc.Worker, arg},
       # Start to serve requests, typically the last entry
       MailblocWeb.Endpoint,
+      # Blocklist Loader (creates all ETS tables, loads data, updates daily)
+      Mailbloc.BlocklistLoader,
       # DNS Resolver with rate limiting (creates MX cache)
       Mailbloc.DNS.MXResolver,
       Mailbloc.IPMatcher,
-      # Blocklist Loader (creates all ETS tables, loads data, updates daily)
-      Mailbloc.BlocklistLoader
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

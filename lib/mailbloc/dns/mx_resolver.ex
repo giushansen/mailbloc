@@ -1,155 +1,207 @@
 defmodule Mailbloc.DNS.MXResolver do
   @moduledoc """
-  High-performance MX resolver with rate limiting and timeout protection.
+  DNS MX resolver proxy with per-server rate limiting.
 
-  PERFORMANCE OPTIMIZATIONS:
-  - 1.5-second timeout (faster than 2s)
-  - Parallel DNS queries to all servers (first to respond wins)
-  - Token bucket rate limiting (200 queries/second)
-  - Task pool to avoid process spawning overhead
+  Acts as a rate-limiting proxy that:
+  1. Rotates through 10 DNS servers (round-robin)
+  2. Rate limits EACH DNS server independently (100 qps each)
+  3. Skips DNS servers that are rate-limited
+  4. Falls back to next available server
+  5. Total capacity: 1,000 queries/second
+
+  This module does NOT create ETS tables - it's purely a DNS query proxy.
+  The :mx_cache ETS table is created by Mailbloc.BlocklistLoader.
   """
 
   use GenServer
   require Logger
 
-  # DNS servers (all queried in parallel)
+  # DNS servers with explicit ports and names for debugging
   @dns_servers [
-    {8, 8, 8, 8},        # Google Primary
-    {1, 1, 1, 1},        # Cloudflare Primary
-    {9, 9, 9, 9}         # Quad9 Primary
+    {{8, 8, 8, 8}, 53, "Google Primary"},
+    {{8, 8, 4, 4}, 53, "Google Secondary"},
+    {{1, 1, 1, 1}, 53, "Cloudflare Primary"},
+    {{1, 0, 0, 1}, 53, "Cloudflare Secondary"},
+    {{9, 9, 9, 9}, 53, "Quad9 Primary"},
+    {{149, 112, 112, 112}, 53, "Quad9 Secondary"},
+    {{208, 67, 222, 222}, 53, "OpenDNS Primary"},
+    {{208, 67, 220, 220}, 53, "OpenDNS Secondary"},
+    {{209, 244, 0, 3}, 53, "Level3 Primary"},
+    {{209, 244, 0, 4}, 53, "Level3 Secondary"}
   ]
 
-  # Rate limiting: 200 queries per second (increased from 100)
-  @max_queries_per_second 200
-  @bucket_refill_interval 1000 # 1 second
-
-  # Timeout for DNS queries (reduced from 2s to 1.5s)
-  @dns_timeout 1500 # 1.5 seconds
+  # Rate limiting: 100 queries/sec per server = 1000 total qps
+  # Conservative limit to prevent bans while allowing high throughput
+  @queries_per_second_per_server 100
+  @token_refill_interval 1000
+  @dns_timeout 2000
 
   # ============================================================================
   # CLIENT API
   # ============================================================================
 
-  def start_link(opts \\ []) do
+  def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
   @doc """
-  Lookup MX records with timeout and rate limiting.
-  OPTIMIZED: Queries all DNS servers in parallel, returns first success.
+  Lookup MX records using round-robin rotation with per-server rate limiting.
+
+  Returns sorted list of MX records by priority, or error if rate limited or failed.
+  DNS query is performed outside the GenServer for better concurrency.
   """
   @spec lookup_mx(String.t()) :: {:ok, list()} | {:error, atom()}
   def lookup_mx(domain) do
-    GenServer.call(__MODULE__, {:lookup_mx, domain}, @dns_timeout + 500)
+    case GenServer.call(__MODULE__, {:acquire_server, domain}, 1_000) do
+      {:ok, server_index} ->
+        perform_lookup(domain, server_index)
+
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 
   # ============================================================================
-  # SERVER CALLBACKS
+  # GENSERVER CALLBACKS
   # ============================================================================
 
   @impl true
   def init(_opts) do
+    # Initialize token bucket for each DNS server
+    server_tokens =
+      @dns_servers
+      |> Enum.with_index()
+      |> Map.new(fn {_server, idx} -> {idx, @queries_per_second_per_server} end)
+
     state = %{
-      tokens: @max_queries_per_second,
-      max_tokens: @max_queries_per_second
+      server_tokens: server_tokens,
+      max_tokens: @queries_per_second_per_server,
+      current_index: 0,
+      server_count: length(@dns_servers)
     }
 
     schedule_token_refill()
 
-    Logger.info("[MXResolver] Started with #{@max_queries_per_second} queries/sec, #{@dns_timeout}ms timeout")
+    total_capacity = state.server_count * @queries_per_second_per_server
+
+    Logger.info(
+      "[MXResolver] Started with #{length(@dns_servers)} DNS servers, " <>
+        "#{@queries_per_second_per_server} qps per server (#{total_capacity} total qps)"
+    )
+
     {:ok, state}
   end
 
   @impl true
-  def handle_call({:lookup_mx, domain}, _from, state) do
-    case consume_token(state) do
-      {:ok, new_state} ->
-        result = perform_parallel_lookup(domain)
-        {:reply, result, new_state}
+  def handle_call({:acquire_server, domain}, _from, state) do
+    case find_available_server(state) do
+      {:ok, server_index, new_state} ->
+        # Move to next server for round-robin distribution
+        next_index = rem(state.current_index + 1, state.server_count)
+        {:reply, {:ok, server_index}, %{new_state | current_index: next_index}}
 
-      {:error, :rate_limited} ->
-        Logger.warning("[MXResolver] Rate limit exceeded for: #{domain}")
+      {:error, :all_rate_limited} ->
+        Logger.warning("[MXResolver] All DNS servers rate-limited for #{domain}")
         {:reply, {:error, :rate_limited}, state}
     end
   end
 
   @impl true
   def handle_info(:refill_tokens, state) do
+    # Refill all servers back to max tokens every second
+    refilled =
+      state.server_tokens
+      |> Map.new(fn {idx, _} -> {idx, state.max_tokens} end)
+
     schedule_token_refill()
-    {:noreply, %{state | tokens: state.max_tokens}}
+    {:noreply, %{state | server_tokens: refilled}}
   end
 
   # ============================================================================
-  # OPTIMIZED PARALLEL DNS LOOKUP
+  # DNS SERVER SELECTION & RATE LIMITING
   # ============================================================================
 
-  defp perform_parallel_lookup(domain) do
-    charlist_domain = String.to_charlist(domain)
+  # Try to find an available server starting from current index (round-robin)
+  defp find_available_server(state), do: try_servers(state, state.current_index, 0)
 
-    # Query all DNS servers in parallel, return first success
-    tasks =
-      @dns_servers
-      |> Enum.map(fn dns_server ->
-        Task.async(fn ->
-          query_dns_server(charlist_domain, dns_server)
-        end)
-      end)
+  # Tried all servers, all are rate-limited
+  defp try_servers(state, _start_index, attempt) when attempt >= state.server_count do
+    {:error, :all_rate_limited}
+  end
 
-    # Wait for first successful response
-    case Task.yield_many(tasks, @dns_timeout) do
-      results ->
-        # Find first successful result
-        success =
-          results
-          |> Enum.find_value(fn
-            {_task, {:ok, {:ok, mx_records}}} -> {:ok, mx_records}
-            _ -> nil
-          end)
+  # Try server at current position in rotation
+  defp try_servers(state, start_index, attempt) do
+    idx = rem(start_index + attempt, state.server_count)
+    tokens = Map.get(state.server_tokens, idx, 0)
 
-        # Shutdown remaining tasks
-        Enum.each(tasks, &Task.shutdown(&1, :brutal_kill))
+    if tokens > 0 do
+      # Consume one token from this server
+      new_tokens = Map.put(state.server_tokens, idx, tokens - 1)
+      {:ok, idx, %{state | server_tokens: new_tokens}}
+    else
+      # This server is rate-limited, try next one
+      try_servers(state, start_index, attempt + 1)
+    end
+  end
 
-        success || {:ok, []}
+  # ============================================================================
+  # DNS LOOKUP (executed outside GenServer for concurrency)
+  # ============================================================================
+
+  defp perform_lookup(domain, server_index) do
+    {ip, port, name} = Enum.at(@dns_servers, server_index)
+    char_domain = String.to_charlist(domain)
+
+    result =
+      :inet_res.lookup(
+        char_domain,
+        :in,
+        :mx,
+        nameservers: [{ip, port}],
+        timeout: @dns_timeout
+      )
+
+    case result do
+      [] ->
+        {:ok, []}
+
+      mx when is_list(mx) ->
+        # Sort by priority (lower number = higher priority)
+        sorted = Enum.sort_by(mx, fn {priority, _host} -> priority end)
+
+        if Mix.env() != :test do
+          Logger.debug("[MXResolver] #{domain} → #{name} (#{format_ip(ip)}:#{port})")
+        end
+
+        {:ok, sorted}
+
+      _ ->
+        Logger.warning("[MXResolver] Unexpected result from #{name}: #{inspect(result)}")
+        {:error, :lookup_failed}
     end
   rescue
     e ->
-      Logger.error("[MXResolver] Exception for #{domain}: #{inspect(e)}")
+      {_ip, _port, dns_name} = Enum.at(@dns_servers, server_index)
+
+      # Only log errors that aren't expected validation failures
+      if not is_validation_error?(e) do
+        Logger.error("[MXResolver] Exception on #{dns_name} for #{domain}: #{inspect(e)}")
+      end
+
       {:error, :exception}
   end
 
-  defp query_dns_server(domain, dns_server) do
-    result = :inet_res.lookup(
-      domain,
-      :in,
-      :mx,
-      nameservers: [{dns_server, 53}],
-      timeout: @dns_timeout
-    )
-
-    case result do
-      [] -> {:ok, []}
-      mx_records when is_list(mx_records) ->
-        sorted = Enum.sort_by(mx_records, fn {priority, _host} -> priority end)
-        {:ok, sorted}
-      _ -> {:error, :lookup_failed}
-    end
-  rescue
-    _ -> {:error, :exception}
-  end
+  # Check if this is an expected validation error (like invalid domain format)
+  defp is_validation_error?(%FunctionClauseError{function: :encode_labels}), do: true
+  defp is_validation_error?(_), do: false
 
   # ============================================================================
-  # RATE LIMITING
+  # HELPERS
   # ============================================================================
-
-  defp consume_token(%{tokens: tokens} = state) when tokens > 0 do
-    {:ok, %{state | tokens: tokens - 1}}
-  end
-
-  defp consume_token(_state) do
-    {:error, :rate_limited}
-  end
 
   defp schedule_token_refill do
-    Process.send_after(self(), :refill_tokens, @bucket_refill_interval)
+    Process.send_after(self(), :refill_tokens, @token_refill_interval)
   end
+
+  defp format_ip({a, b, c, d}), do: "#{a}.#{b}.#{c}.#{d}"
 end
