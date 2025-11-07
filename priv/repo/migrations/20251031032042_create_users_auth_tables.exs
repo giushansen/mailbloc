@@ -7,7 +7,7 @@ defmodule Mailbloc.Repo.Migrations.CreateUsersAuthTables do
       add :email, :string, null: false, collate: :nocase
       add :hashed_password, :string
       add :confirmed_at, :utc_datetime
-      add :api_token, :string
+      add :api_token, :string, null: false
 
       timestamps(type: :utc_datetime)
     end

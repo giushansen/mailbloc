@@ -23,6 +23,7 @@ defmodule Mailbloc.Application do
       # DNS Resolver with rate limiting (creates MX cache)
       Mailbloc.DNS.MXResolver,
       Mailbloc.IPMatcher,
+      Mailbloc.RateLimitLoader
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

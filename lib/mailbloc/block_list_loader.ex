@@ -13,21 +13,16 @@ defmodule Mailbloc.BlocklistLoader do
   @base_dir "priv/blocklists"
 
   @blocklists [
-    # HIGH RISK - IPs
     {:criminal_network_ip, "https://www.spamhaus.org/drop/drop.txt"},
     {:malicious_ip, "https://raw.githubusercontent.com/stamparm/ipsum/master/levels/8.txt"},
     {:tor_network_ip, "https://check.torproject.org/torbulkexitlist"},
     {:recent_attacker_ip, "https://raw.githubusercontent.com/borestad/blocklist-abuseipdb/main/abuseipdb-s100-1d.ipv4"},
-    # HIGH RISK - Emails
     {:disposable_email, "https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/master/disposable_email_blocklist.conf"},
-    # MEDIUM RISK - IPs
     {:week_attacker_ip, "https://raw.githubusercontent.com/borestad/blocklist-abuseipdb/main/abuseipdb-s100-7d.ipv4"},
     {:suspicious_ip, "https://raw.githubusercontent.com/stamparm/ipsum/master/levels/3.txt"},
     {:vpn_ip, "https://raw.githubusercontent.com/X4BNet/lists_vpn/main/output/vpn/ipv4.txt"},
     {:datacenter_ip, "https://raw.githubusercontent.com/X4BNet/lists_vpn/main/output/datacenter/ipv4.txt"},
-    # MEDIUM RISK - Emails
     {:privacy_email, "https://raw.githubusercontent.com/disposable/disposable-email-domains/master/domains_strict.txt"},
-    # LOW RISK - IPs
     {:reported_ip, "https://raw.githubusercontent.com/stamparm/ipsum/master/levels/1.txt"},
     {:old_attacker_ip, "https://raw.githubusercontent.com/borestad/blocklist-abuseipdb/main/abuseipdb-s100-30d.ipv4"}
   ]
@@ -43,15 +38,21 @@ defmodule Mailbloc.BlocklistLoader do
   def init(_opts) do
     create_all_ets_tables()
 
-    # Load existing data SYNCHRONOUSLY so tables are ready before init returns
-    {last_update, last_status} = case load_latest_blocklists() do
-      :ok ->
-        Logger.info("[BlocklistLoader] ✓ Loaded existing blocklists")
-        {DateTime.utc_now(), :ok}
+    # In test mode, just create empty tables and skip loading
+    {last_update, last_status} = if Mix.env() == :test do
+      Logger.info("[BlocklistLoader] Test mode - empty tables")
+      {nil, :ok}
+    else
+      # In dev/prod, try to load existing data synchronously
+      case load_latest_blocklists() do
+        :ok ->
+          Logger.info("[BlocklistLoader] ✓ Loaded existing blocklists")
+          {DateTime.utc_now(), :ok}
 
-      {:error, :no_existing} ->
-        Logger.info("[BlocklistLoader] No existing blocklists (OK in test mode)")
-        {nil, :pending}
+        {:error, :no_existing} ->
+          Logger.info("[BlocklistLoader] No existing blocklists")
+          {nil, :pending}
+      end
     end
 
     state = %{
@@ -61,8 +62,10 @@ defmodule Mailbloc.BlocklistLoader do
       next_update_at: calculate_next_update_time()
     }
 
-    # Schedule background update (async, happens later)
-    schedule_update()
+    # Schedule background updates (only in non-test mode)
+    unless Mix.env() == :test do
+      schedule_update()
+    end
 
     Logger.info("[BlocklistLoader] Initialized with #{length(@blocklists)} blocklists")
     {:ok, state}

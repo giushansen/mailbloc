@@ -9,6 +9,17 @@ defmodule MailblocWeb.API.CheckController do
   Returns: %{risk_level: "high", reasons: ["disposable_email"]}
   """
   def check(conn, params) do
+    # require IEx; IEx.pry()
+
+    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
+         :ok <- check_rate_limit(token) do
+      conn
+    else
+      [] -> send_error(conn, 401, "Missing API token")
+      {:error, :invalid} -> send_error(conn, 401, "Invalid API token")
+      {:error, :rate_limited} -> send_error(conn, 429, "Rate limit exceeded")
+    end
+
     email = params["email"]
     ip = params["ip"]
 
@@ -52,6 +63,25 @@ defmodule MailblocWeb.API.CheckController do
           message: "IP must be in valid IPv4 format (e.g., 192.168.1.1)"
         })
     end
+  end
+
+  defp check_rate_limit(token) do
+    current_minute = div(System.system_time(:second), 60)
+
+    case :ets.lookup(:api_rate_limit, token) do
+      [] -> {:error, :invalid}
+      [{^token, ^current_minute, 0}] -> {:error, :rate_limited}
+      [{^token, ^current_minute, count}] ->
+        :ets.update_element(:api_rate_limit, token, {3, count - 1})
+        :ok
+      [{^token, _old_minute, _}] ->
+        :ets.insert(:api_rate_limit, {token, current_minute, 29})
+        :ok
+    end
+  end
+
+  defp send_error(conn, status, message) do
+    conn |> put_status(status) |> json(%{error: message}) |> halt()
   end
 
   # ============================================================================
