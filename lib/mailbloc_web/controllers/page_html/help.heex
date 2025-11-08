@@ -36,7 +36,7 @@
               <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
-              API
+              API Reference
             </summary>
             <ul class="menu menu-compact pl-4">
               <li><a href="#api-endpoint">API Endpoint</a></li>
@@ -49,15 +49,17 @@
           </details>
         </li>
         <li>
-          <details class="dropdown" id="section-scoring">
-            <summary class="cursor-pointer flex items-center gap-2 font-bold" data-section="scoring">
+          <details class="dropdown" id="section-risk-classification">
+            <summary class="cursor-pointer flex items-center gap-2 font-bold" data-section="risk-classification">
               <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
-              Scoring
+              Risk Classification
             </summary>
             <ul class="menu menu-compact pl-4">
-              <li><a href="#scoring-overview">Overview</a></li>
+              <li><a href="#risk-overview">How It Works</a></li>
+              <li><a href="#risk-levels">Risk Levels</a></li>
+              <li><a href="#risk-reasons">Reason Codes</a></li>
             </ul>
           </details>
         </li>
@@ -92,15 +94,15 @@
             </a>
           </h1>
           <p class="text-base-content/70 mb-4">
-            Mailbloc is a lightweight email and/or IP validation API that provides instant protection against fake sign-ups, disposable emails, and fraudulent registrations. With a single API call, you can validate email addresses and IP addresses to keep your user base clean and secure.
+            Mailbloc is a lightweight email and IP validation API that provides instant protection against fake sign-ups, disposable emails, and fraudulent registrations. With a single API call, you can validate email addresses and IP addresses to keep your user base clean and secure.
           </p>
           
           <h2 class="text-2xl font-semibold text-base-content mb-3 mt-6">What Mailbloc Does</h2>
           <div class="space-y-3 text-base-content/70">
-            <p><strong class="text-base-content">Email Validation:</strong> Detect disposable email addresses, verify MX records, and identify risky email patterns.</p>
-            <p><strong class="text-base-content">IP Analysis:</strong> Check IP addresses for suspicious activity, VPN usage, and known fraud patterns.</p>
-            <p><strong class="text-base-content">Risk Scoring:</strong> Get instant risk levels with clear recommendations on whether to accept or reject a sign-up.</p>
-            <p><strong class="text-base-content">Simple Integration:</strong> Just make an API call - no complex setup, no authentication headaches.</p>
+            <p><strong class="text-base-content">Email Validation:</strong> Detect disposable email addresses, verify MX records, identify privacy forwarding services, and assess email quality.</p>
+            <p><strong class="text-base-content">IP Analysis:</strong> Check IP addresses against threat databases for malicious activity, TOR networks, VPNs, and known fraud patterns.</p>
+            <p><strong class="text-base-content">Risk Classification:</strong> Get instant risk levels (HIGH, MEDIUM, LOW, NONE) with specific reason codes explaining why.</p>
+            <p><strong class="text-base-content">Simple Integration:</strong> Just make an API call with your Bearer token - no complex setup or authentication flows.</p>
           </div>
         </section>
 
@@ -121,243 +123,609 @@
               </a>
             </h3>
             <p class="text-base-content/70 mb-4">
-              Getting started with Mailbloc is remarkably simple. You just need to make API calls to our endpoint and interpret the risk level in the response. No complex setup, no complicated authentication flows - just straightforward API requests.
+              Getting started with Mailbloc is remarkably simple. You just need to make API calls to our endpoint with your API token and interpret the risk level in the response.
             </p>
             
             <div class="space-y-4 mb-6">
               <div class="bg-base-200 p-4 rounded-lg">
                 <h4 class="font-semibold text-base-content mb-2">1. Sign Up</h4>
                 <p class="text-base-content/70 text-sm mb-2">
-                  Create your account at <a href="https://mailbloc.com" class="link link-primary">mailbloc.com</a>. You don't even need a password! We'll send you a magic link to access your account.
+                  Create your account at <a href="https://mailbloc.com/users/register" class="link link-primary">mailbloc.com</a>. No password needed! We'll send you a magic link to access your account.
                 </p>
               </div>
 
               <div class="bg-base-200 p-4 rounded-lg">
-                <h4 class="font-semibold text-base-content mb-2">2. Get Your API Key</h4>
+                <h4 class="font-semibold text-base-content mb-2">2. Get Your API Token</h4>
                 <p class="text-base-content/70 text-sm mb-2">
-                  Once signed up, you'll receive your API key instantly. This key authenticates your requests to the Mailbloc API.
+                  Once signed up, you'll see your API token on your welcome page. Copy it and keep it secure - you'll use this in the Authorization header.
                 </p>
               </div>
 
               <div class="bg-base-200 p-4 rounded-lg">
                 <h4 class="font-semibold text-base-content mb-2">3. Make API Calls</h4>
                 <p class="text-base-content/70 text-sm mb-2">
-                  Start validating emails and IPs immediately by making requests to <code class="px-2 py-1 bg-base-300 rounded text-sm">https://api.mailbloc.com</code>. Include your API key in the Authorization header and pass the email and/or IP as query parameters.
+                  Start validating emails and IPs immediately by making GET requests to <code class="px-2 py-1 bg-base-300 rounded text-sm">https://api.mailbloc.com/check</code> with your Bearer token.
                 </p>
               </div>
 
               <div class="bg-base-200 p-4 rounded-lg">
                 <h4 class="font-semibold text-base-content mb-2">4. Interpret the Risk Level</h4>
                 <p class="text-base-content/70 text-sm mb-2">
-                  The response includes a <code class="px-2 py-1 bg-base-300 rounded text-sm">risk_level</code> field that can contain the following values:
+                  The response includes a <code class="px-2 py-1 bg-base-300 rounded text-sm">risk_level</code> field with one of four values:
                 </p>
                 <ul class="list-disc pl-6 text-base-content/70 text-sm space-y-1 mt-2">
-                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"high"</code> - Significant risk detected, registration should be blocked</li>
-                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"medium"</code> - Moderate risk detected, blocking is recommended for enhanced security</li>
-                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"low"</code> - Minimal risk identified</li>
-                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"none"</code> - No risk indicators found</li>
+                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"high"</code> - Block this signup immediately (disposable email, malicious IP, etc.)</li>
+                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"medium"</code> - Moderate risk - we strongly recommend blocking (privacy forwarding, suspicious patterns)</li>
+                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"low"</code> - Minimal risk, acceptable quality (free email providers like Gmail)</li>
+                  <li><code class="px-2 py-1 bg-base-300 rounded text-sm">"none"</code> - No risk indicators found (clean corporate email with valid MX)</li>
                 </ul>
                 <p class="text-base-content/70 text-sm mt-3">
-                  <strong>Best Practice:</strong> Block registrations with <code class="px-2 py-1 bg-base-300 rounded text-sm">"high"</code> risk level. We also strongly recommend blocking <code class="px-2 py-1 bg-base-300 rounded text-sm">"medium"</code> risk level registrations to maintain the highest level of security and prevent fraudulent sign-ups.
+                  <strong>Best Practice:</strong> Always block <code class="px-2 py-1 bg-base-300 rounded text-sm">"high"</code> risk. We strongly recommend blocking <code class="px-2 py-1 bg-base-300 rounded text-sm">"medium"</code> risk as well for maximum protection.
                 </p>
               </div>
+            </div>
+
+            <div class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span><strong>Pro Tip:</strong> You can validate just an email, just an IP, or both together. The API will classify risk based on whatever data you provide.</span>
             </div>
           </div>
         </section>
 
         <div class="divider mb-16"></div>
 
-        <!-- API Section -->
+        <!-- API Reference Section -->
         <section class="mb-16">
-          <h2 class="text-2xl font-bold text-base-content mb-4" id="api">API</h2>
+          <h2 class="text-2xl font-bold text-base-content mb-4" id="api">API Reference</h2>
 
           <!-- API Endpoint -->
           <div id="api-endpoint" class="mb-12 scroll-mt-30">
             <h3 class="text-xl font-semibold text-base-content mb-3">API Endpoint</h3>
             <p class="text-base-content/70 mb-4">
-              The Mailbloc API endpoint accepts GET requests with email and/or IP parameters. Here's a complete example using cURL:
+              The Mailbloc API has a single endpoint for all validation requests:
             </p>
-            <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-left font-mono text-sm whitespace-normal">
-              <pre><code class="text-gray-300">
-                <%= ~S"""
-                  curl -X GET \
-                    'https://api.mailbloc.com/check?email=fake@disposable-email.com&ip=127.0.0.1' \
-                    -H 'Accept: application/json' \
-                    -H 'Authorization: Bearer API_KEY'
-                """ %>
-              </code></pre>
+            
+            <div class="bg-base-200 p-4 rounded-lg mb-4">
+              <code class="text-sm font-mono">GET https://api.mailbloc.com/check</code>
             </div>
+
+            <h4 class="font-semibold text-base-content mb-2 mt-4">Authentication</h4>
+            <p class="text-base-content/70 mb-2">
+              Include your API token in the Authorization header:
+            </p>
+            <div class="bg-base-200 p-4 rounded-lg mb-4">
+              <code class="text-sm font-mono">Authorization: Bearer YOUR_API_TOKEN</code>
+            </div>
+
+            <h4 class="font-semibold text-base-content mb-2 mt-4">Query Parameters</h4>
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code class="text-sm">email</code></td>
+                    <td>string</td>
+                    <td>No*</td>
+                    <td>Email address to validate (must contain '@')</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">ip</code></td>
+                    <td>string</td>
+                    <td>No*</td>
+                    <td>IPv4 address to check (e.g., 192.168.1.1)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="text-sm text-base-content/60 mt-2">* At least one of <code>email</code> or <code>ip</code> must be provided</p>
           </div>
 
-          <!-- API Responses -->
+          <!-- Response Format -->
           <div id="api-responses" class="mb-12 scroll-mt-30">
             <h3 class="text-xl font-semibold text-base-content mb-3">Response Format</h3>
             <p class="text-base-content/70 mb-4">
-              The API returns JSON responses with validation results. Here are examples of success and error responses:
+              All successful responses return JSON with this structure:
             </p>
-            
-            <h4 class="text-lg font-semibold text-base-content mb-3 mt-6">Success Response</h4>
-            <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-left font-mono text-sm whitespace-normal mb-6">
+
+            <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto">
               <pre><code class="text-gray-300">
                 <%= ~S"""
-                  {
-                    "success": true,
-                    "data": {
-                      "email": "joe@gmail.com",
-                      "risk_level": "none",
-                      "score": "40",
-                      "reason": ["mx_ok", "not_disposable", "ip_clean"]
-                    }
-                  }
-                """ %>
-              </code></pre>
+                {
+                  "risk_level": "high",
+                  "reasons": ["disposable_email", "tor_network_ip"]
+                }
+                """ %></code></pre>
             </div>
 
-            <h4 class="text-lg font-semibold text-base-content mb-3 mt-6">Rate Limit Response</h4>
-            <p class="text-base-content/70 mb-4">
-              When you exceed your rate limit, you'll receive the following response:
-            </p>
-            <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-left font-mono text-sm whitespace-normal">
-              <pre><code class="text-gray-300">
-                <%= ~S"""
-                  {
-                    "success": false,
-                    "data": {
-                      "reason": ["rate_limit_exceeded"]
-                    }
-                  }
-                """ %>
-              </code></pre>
+            <h4 class="font-semibold text-base-content mb-2 mt-6">Response Fields</h4>
+            <div class="overflow-x-auto mb-4">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code class="text-sm">risk_level</code></td>
+                    <td>string</td>
+                    <td>Risk classification: "high", "medium", "low", or "none"</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">reasons</code></td>
+                    <td>array</td>
+                    <td>Array of reason codes explaining the risk (empty array for "none" risk)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 class="font-semibold text-base-content mb-2 mt-6">Example Responses</h4>
+            
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm font-semibold text-base-content mb-2">Clean corporate email (NONE risk):</p>
+                <div class="mockup-code bg-gray-800 shadow-lg text-sm">
+                  <pre><code class="text-gray-300"><%= ~S"""
+                  {"risk_level": "none", "reasons": []}
+                  """ %></code></pre>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold text-base-content mb-2">Free email provider (LOW risk):</p>
+                <div class="mockup-code bg-gray-800 shadow-lg text-sm">
+                  <pre><code class="text-gray-300"><%= ~S"""
+                  {"risk_level": "low", "reasons": ["free_email"]}
+                  """ %></code></pre>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold text-base-content mb-2">Privacy forwarding service (MEDIUM risk):</p>
+                <div class="mockup-code bg-gray-800 shadow-lg text-sm">
+                  <pre><code class="text-gray-300"><%= ~S"""
+                  {"risk_level": "medium", "reasons": ["privacy_email"]}
+                  """ %></code></pre>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold text-base-content mb-2">Disposable email (HIGH risk):</p>
+                <div class="mockup-code bg-gray-800 shadow-lg text-sm">
+                  <pre><code class="text-gray-300"><%= ~S"""
+                  {"risk_level": "high", "reasons": ["disposable_email"]}
+                  """ %></code></pre>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold text-base-content mb-2">TOR network IP (HIGH risk):</p>
+                <div class="mockup-code bg-gray-800 shadow-lg text-sm">
+                  <pre><code class="text-gray-300"><%= ~S"""
+                  {"risk_level": "high", "reasons": ["tor_network_ip"]}
+                  """ %></code></pre>
+                </div>
+              </div>
+
+              <div>
+                <p class="text-sm font-semibold text-base-content mb-2">Multiple risk factors:</p>
+                <div class="mockup-code bg-gray-800 shadow-lg text-sm">
+                  <pre><code class="text-gray-300"><%= ~S"""
+                  {"risk_level": "high", "reasons": ["disposable_email", "tor_network_ip"]}
+                  """ %></code></pre>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="font-semibold text-base-content mb-2 mt-6">Error Responses</h4>
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Status Code</th>
+                    <th>Error</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>400</td>
+                    <td>missing_params</td>
+                    <td>Neither email nor IP was provided</td>
+                  </tr>
+                  <tr>
+                    <td>400</td>
+                    <td>invalid_email</td>
+                    <td>Email format is incorrect</td>
+                  </tr>
+                  <tr>
+                    <td>400</td>
+                    <td>invalid_ip</td>
+                    <td>IP address format is incorrect</td>
+                  </tr>
+                  <tr>
+                    <td>401</td>
+                    <td>Missing API token</td>
+                    <td>Authorization header is missing</td>
+                  </tr>
+                  <tr>
+                    <td>401</td>
+                    <td>Invalid API token</td>
+                    <td>API token is invalid or expired</td>
+                  </tr>
+                  <tr>
+                    <td>429</td>
+                    <td>Rate limit exceeded</td>
+                    <td>Too many requests in the current time window</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
           <!-- JavaScript Implementation -->
           <div id="api-javascript" class="mb-12 scroll-mt-30">
-            <h3 class="text-xl font-semibold text-base-content mb-3">JavaScript</h3>
+            <h3 class="text-xl font-semibold text-base-content mb-3">JavaScript Example</h3>
             <p class="text-base-content/70 mb-4">
-              Here's how to integrate Mailbloc with JavaScript using the Fetch API:
+              Use the Fetch API to call Mailbloc from JavaScript:
             </p>
             <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-left font-mono text-sm whitespace-normal">
-              <pre><code class="text-gray-300">
-                <%= ~S"""
-                  import fetch from 'node-fetch';
-                   
-                  const response = await fetch(
-                    'https://api.mailbloc.com/check?email=test@example.com&ip=192.168.1.1',
-                    {
-                      method: 'GET',
-                      headers: {
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer [YOUR_API_KEY]'
-                      }
+              <pre><code class="text-gray-300"><%= ~S"""
+
+                const apiToken = 'YOUR_API_TOKEN';
+                const email = 'test@example.com';
+                const ip = '192.168.1.1';
+
+                fetch(`https://api.mailbloc.com/check?email=${email}&ip=${ip}`, {
+                  headers: {
+                    'Authorization': `Bearer ${apiToken}`
+                  }
+                }).then(response => response.json())
+                  .then(data => {
+                    console.log('Risk Level:', data.risk_level);
+                    console.log('Reasons:', data.reasons);
+                    
+                    // Block HIGH and MEDIUM risk signups
+                    if (data.risk_level === 'high' || data.risk_level === 'medium') {
+                      alert('Signup blocked: Suspicious activity detected');
+                    } else {
+                      console.log('Signup allowed');
                     }
-                  );
-                   
-                  const json = await response.json();
-                  console.log(json);
-                """ %>
-              </code></pre>
+                  })
+                  .catch(error => console.error('Error:', error));
+              """ %></code></pre>
             </div>
           </div>
 
           <!-- Python Implementation -->
           <div id="api-python" class="mb-12 scroll-mt-30">
-            <h3 class="text-xl font-semibold text-base-content mb-3">Python</h3>
+            <h3 class="text-xl font-semibold text-base-content mb-3">Python Example</h3>
             <p class="text-base-content/70 mb-4">
-              Integrate Mailbloc with Python using the requests library:
+              Use the requests library to integrate Mailbloc:
             </p>
             <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-left font-mono text-sm whitespace-normal">
-              <pre><code class="text-gray-300">
-                <%= ~S"""
-                  import requests
-                   
-                  url = 'https://api.mailbloc.com/check?email=test@example.com&ip=192.168.1.1'
-                  headers = {
-                      'Accept': 'application/json',
-                      'Authorization': 'Bearer [YOUR_API_KEY]'
-                  }
-                   
-                  response = requests.get(url, headers=headers)
-                  json_response = response.json()
-                  print(json_response)
-                """ %>
-              </code></pre>
+              <pre><code class="text-gray-300"><%= ~S"""
+
+                import requests
+
+                api_token = 'YOUR_API_TOKEN'
+                email = 'test@example.com'
+                ip = '192.168.1.1'
+
+                url = f'https://api.mailbloc.com/check?email={email}&ip={ip}'
+                headers = {
+                    'Authorization': f'Bearer {api_token}'
+                }
+
+                response = requests.get(url, headers=headers)
+                data = response.json()
+
+                print(f"Risk Level: {data['risk_level']}")
+                print(f"Reasons: {data['reasons']}")
+
+                # Block HIGH and MEDIUM risk signups
+                if data['risk_level'] in ['high', 'medium']:
+                    print('Signup blocked: Suspicious activity detected')
+                else:
+                    print('Signup allowed')
+              """ %></code></pre>
             </div>
           </div>
 
           <!-- PHP Implementation -->
           <div id="api-php" class="mb-12 scroll-mt-30">
-            <h3 class="text-xl font-semibold text-base-content mb-3">PHP</h3>
+            <h3 class="text-xl font-semibold text-base-content mb-3">PHP Example</h3>
             <p class="text-base-content/70 mb-4">
               Use PHP's cURL extension to call the Mailbloc API:
             </p>
             <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-left font-mono text-sm whitespace-normal">
-              <pre><code class="text-gray-300">
-                <%= ~S"""
-                  <?php
-                  $url = 'https://api.mailbloc.com/check?email=test@example.com&ip=192.168.1.1';
-                  $headers = [
-                      'Accept: application/json',
-                      'Authorization: Bearer [YOUR_API_KEY]'
-                  ];
-                  
-                  $ch = curl_init();
-                  curl_setopt($ch, CURLOPT_URL, $url);
-                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                  
-                  $response = curl_exec($ch);
-                  curl_close($ch);
-                  
-                  $json_response = json_decode($response, true);
-                  print_r($json_response);
-                  ?>
-                """ %>
-              </code></pre>
+              <pre><code class="text-gray-300"><%= ~S"""
+
+                <?php
+                $apiToken = 'YOUR_API_TOKEN';
+                $email = 'test@example.com';
+                $ip = '192.168.1.1';
+
+                $url = "https://api.mailbloc.com/check?email=$email&ip=$ip";
+                $headers = [
+                    'Authorization: Bearer ' . $apiToken
+                ];
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                $response = curl_exec($ch);
+                curl_close($ch);
+
+                $data = json_decode($response, true);
+
+                echo "Risk Level: " . $data['risk_level'] . "\n";
+                echo "Reasons: " . implode(', ', $data['reasons']) . "\n";
+
+                // Block HIGH and MEDIUM risk signups
+                if (in_array($data['risk_level'], ['high', 'medium'])) {
+                    echo "Signup blocked: Suspicious activity detected\n";
+                } else {
+                    echo "Signup allowed\n";
+                }
+                ?>
+              """ %></code></pre>
             </div>
           </div>
 
           <!-- Ruby Implementation -->
           <div id="api-ruby" class="mb-12 scroll-mt-30">
-            <h3 class="text-xl font-semibold text-base-content mb-3">Ruby</h3>
+            <h3 class="text-xl font-semibold text-base-content mb-3">Ruby Example</h3>
             <p class="text-base-content/70 mb-4">
               Integrate Mailbloc with Ruby using the Net::HTTP library:
             </p>
             <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-left font-mono text-sm whitespace-normal">
-              <pre><code class="text-gray-300">
-                <%= ~S"""
-                  require 'net/http'
-                  require 'json'
-                  
-                  uri = URI('https://api.mailbloc.com/check?email=test@example.com&ip=192.168.1.1')
-                  
-                  request = Net::HTTP::Get.new(uri)
-                  request['Accept'] = 'application/json'
-                  request['Authorization'] = 'Bearer [YOUR_API_KEY]'
-                  
-                  response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-                    http.request(request)
-                  end
-                  
-                  json_response = JSON.parse(response.body)
-                  puts json_response
-                """ %>
-              </code></pre>
+              <pre><code class="text-gray-300"><%= ~S"""
+
+                require 'net/http'
+                require 'json'
+
+                api_token = 'YOUR_API_TOKEN'
+                email = 'test@example.com'
+                ip = '192.168.1.1'
+
+                uri = URI("https://api.mailbloc.com/check?email=#{email}&ip=#{ip}")
+                request = Net::HTTP::Get.new(uri)
+                request['Authorization'] = "Bearer #{api_token}"
+
+                response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+                  http.request(request)
+                end
+
+                data = JSON.parse(response.body)
+
+                puts "Risk Level: #{data['risk_level']}"
+                puts "Reasons: #{data['reasons'].join(', ')}"
+
+                # Block HIGH and MEDIUM risk signups
+                if ['high', 'medium'].include?(data['risk_level'])
+                  puts 'Signup blocked: Suspicious activity detected'
+                else
+                  puts 'Signup allowed'
+                end
+              """ %></code></pre>
             </div>
           </div>
         </section>
 
         <div class="divider mb-16"></div>
 
-        <!-- Scoring Section -->
+        <!-- Risk Classification Section -->
         <section class="mb-16">
-          <h2 class="text-2xl font-bold text-base-content mb-4" id="scoring">Scoring</h2>
+          <h2 class="text-2xl font-bold text-base-content mb-4" id="risk-classification">Risk Classification</h2>
 
-          <div id="scoring-overview" class="mb-12 scroll-mt-30">
-            <h3 class="text-xl font-semibold text-base-content mb-3">Overview</h3>
+          <div id="risk-overview" class="mb-12 scroll-mt-30">
+            <h3 class="text-xl font-semibold text-base-content mb-3">How It Works</h3>
             <p class="text-base-content/70 mb-4">
-              Detailed scoring documentation will be available soon. Our scoring system evaluates multiple factors including email reputation, domain age, MX record validity, IP reputation, and behavioral patterns to provide accurate risk assessments.
+              Mailbloc uses a straightforward 4-tier risk classification system that evaluates both email addresses and IP addresses independently, then combines them to give you a final risk assessment. The system is designed to catch fraud while minimizing false positives.
             </p>
+
+            <div class="bg-base-200 p-6 rounded-lg mb-6">
+              <h4 class="font-semibold text-base-content mb-3">Email Classification Logic</h4>
+              <ol class="list-decimal pl-6 space-y-2 text-base-content/70">
+                <li><strong>Disposable email check:</strong> We check if the domain is in our database of known disposable email providers (10k+ domains) → <span class="badge badge-error">HIGH risk</span></li>
+                <li><strong>Privacy forwarding check:</strong> We detect email forwarding services like SimpleLogin, AnonAddy → <span class="badge badge-warning">MEDIUM risk</span></li>
+                <li><strong>Free provider check:</strong> We identify major free providers (Gmail, Yahoo, Outlook, etc.) → <span class="badge badge-info">LOW risk</span></li>
+                <li><strong>MX validation:</strong> For everything else, we verify the domain has valid MX records:
+                  <ul class="list-disc pl-6 mt-2">
+                    <li>Valid MX records found → <span class="badge badge-success">NONE risk</span> (clean corporate email)</li>
+                    <li>No MX records → <span class="badge badge-error">HIGH risk</span> (invalid domain)</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+
+            <div class="bg-base-200 p-6 rounded-lg mb-6">
+              <h4 class="font-semibold text-base-content mb-3">IP Classification Logic</h4>
+              <ol class="list-decimal pl-6 space-y-2 text-base-content/70">
+                <li><strong>High-risk IPs:</strong> TOR exit nodes, known malicious IPs (Spamhaus DROP), recent attackers (AbuseIPDB 90-day window) → <span class="badge badge-error">HIGH risk</span></li>
+                <li><strong>Medium-risk IPs:</strong> VPNs, datacenter IPs, week-old attack reports → <span class="badge badge-warning">MEDIUM risk</span></li>
+                <li><strong>Low-risk IPs:</strong> Older attack reports (30+ days old) → <span class="badge badge-info">LOW risk</span></li>
+                <li><strong>Clean IPs:</strong> No matches in any threat database → <span class="badge badge-success">NONE risk</span></li>
+              </ol>
+            </div>
+
+            <div class="bg-base-200 p-6 rounded-lg">
+              <h4 class="font-semibold text-base-content mb-3">Combining Email & IP Risk</h4>
+              <p class="text-base-content/70 mb-3">
+                When you provide both email and IP, Mailbloc combines the risks intelligently:
+              </p>
+              <ul class="list-disc pl-6 space-y-2 text-base-content/70">
+                <li><strong>HIGH risk always wins:</strong> If either email or IP is HIGH risk, the final result is HIGH</li>
+                <li><strong>MEDIUM risk is second priority:</strong> If one is MEDIUM and the other is not HIGH, result is MEDIUM</li>
+                <li><strong>Corporate email can upgrade LOW IP to NONE:</strong> A clean corporate email (with valid MX) can override a low-risk IP and result in NONE risk</li>
+                <li><strong>Free email downgrades NONE IP to LOW:</strong> A Gmail address will result in LOW risk even with a clean IP</li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="risk-levels" class="mb-12 scroll-mt-30">
+            <h3 class="text-xl font-semibold text-base-content mb-3">Risk Levels</h3>
+            
+            <div class="space-y-4">
+              <div class="card bg-error/10 border border-error">
+                <div class="card-body">
+                  <h4 class="card-title text-error">HIGH Risk</h4>
+                  <p class="text-base-content/70 mb-2">
+                    <strong>Action:</strong> Block immediately. These are clear fraud indicators.
+                  </p>
+                  <p class="text-sm text-base-content/60">
+                    <strong>Examples:</strong> Disposable emails (tempmail.com), TOR network IPs, malicious IPs from Spamhaus, invalid domains with no MX records.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card bg-warning/10 border border-warning">
+                <div class="card-body">
+                  <h4 class="card-title text-warning">MEDIUM Risk</h4>
+                  <p class="text-base-content/70 mb-2">
+                    <strong>Action:</strong> We strongly recommend blocking. These signups are suspicious.
+                  </p>
+                  <p class="text-sm text-base-content/60">
+                    <strong>Examples:</strong> Privacy forwarding services (SimpleLogin, AnonAddy), VPN users, datacenter IPs, recently reported IPs.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card bg-info/10 border border-info">
+                <div class="card-body">
+                  <h4 class="card-title text-info">LOW Risk</h4>
+                  <p class="text-base-content/70 mb-2">
+                    <strong>Action:</strong> Acceptable quality. Typical consumer signups.
+                  </p>
+                  <p class="text-sm text-base-content/60">
+                    <strong>Examples:</strong> Free email providers (Gmail, Yahoo, Outlook), IPs with old abuse reports (30+ days).
+                  </p>
+                </div>
+              </div>
+
+              <div class="card bg-success/10 border border-success">
+                <div class="card-body">
+                  <h4 class="card-title text-success">NONE Risk</h4>
+                  <p class="text-base-content/70 mb-2">
+                    <strong>Action:</strong> Clean signup. No fraud indicators detected.
+                  </p>
+                  <p class="text-sm text-base-content/60">
+                    <strong>Examples:</strong> Corporate emails with valid MX records (john@company.com), clean residential IPs with no abuse history.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="risk-reasons" class="mb-12 scroll-mt-30">
+            <h3 class="text-xl font-semibold text-base-content mb-3">Reason Codes</h3>
+            <p class="text-base-content/70 mb-4">
+              The <code class="px-2 py-1 bg-base-300 rounded text-sm">reasons</code> array provides specific codes explaining why a risk level was assigned. Here are all possible reason codes:
+            </p>
+
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Reason Code</th>
+                    <th>Risk Level</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code class="text-sm">disposable_email</code></td>
+                    <td><span class="badge badge-error badge-sm">HIGH</span></td>
+                    <td>Email domain is a known disposable email provider</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">invalid_email</code></td>
+                    <td><span class="badge badge-error badge-sm">HIGH</span></td>
+                    <td>Email domain has no valid MX records (cannot receive mail)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">criminal_network_ip</code></td>
+                    <td><span class="badge badge-error badge-sm">HIGH</span></td>
+                    <td>IP is on Spamhaus DROP list (known criminal networks)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">malicious_ip</code></td>
+                    <td><span class="badge badge-error badge-sm">HIGH</span></td>
+                    <td>IP is known for malicious activity (IPsum database)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">tor_network_ip</code></td>
+                    <td><span class="badge badge-error badge-sm">HIGH</span></td>
+                    <td>IP is a TOR exit node</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">recent_attacker_ip</code></td>
+                    <td><span class="badge badge-error badge-sm">HIGH</span></td>
+                    <td>IP reported for attacks in last 90 days (AbuseIPDB)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">privacy_email</code></td>
+                    <td><span class="badge badge-warning badge-sm">MEDIUM</span></td>
+                    <td>Email is a privacy forwarding service (SimpleLogin, AnonAddy)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">vpn_ip</code></td>
+                    <td><span class="badge badge-warning badge-sm">MEDIUM</span></td>
+                    <td>IP is from a VPN provider</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">datacenter_ip</code></td>
+                    <td><span class="badge badge-warning badge-sm">MEDIUM</span></td>
+                    <td>IP belongs to a datacenter (not residential)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">week_attacker_ip</code></td>
+                    <td><span class="badge badge-warning badge-sm">MEDIUM</span></td>
+                    <td>IP reported for attacks 7-30 days ago</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">suspicious_ip</code></td>
+                    <td><span class="badge badge-warning badge-sm">MEDIUM</span></td>
+                    <td>IP exhibits suspicious patterns</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">free_email</code></td>
+                    <td><span class="badge badge-info badge-sm">LOW</span></td>
+                    <td>Email is from a free provider (Gmail, Yahoo, etc.)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">reported_ip</code></td>
+                    <td><span class="badge badge-info badge-sm">LOW</span></td>
+                    <td>IP has old abuse reports (30-90 days)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm">old_attacker_ip</code></td>
+                    <td><span class="badge badge-info badge-sm">LOW</span></td>
+                    <td>IP reported for attacks over 30 days ago</td>
+                  </tr>
+                  <tr>
+                    <td><em>Empty array</em></td>
+                    <td><span class="badge badge-success badge-sm">NONE</span></td>
+                    <td>No risk indicators found (clean)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 
@@ -373,27 +741,34 @@
             <p class="text-base-content/70 mb-4">
               We're here to help with any questions or issues you may encounter. Our team typically responds within 24 hours.
             </p>
-            
-            <div class="bg-base-200 p-6 rounded-lg mb-6">
-              <h4 class="text-lg font-semibold text-base-content mb-3">Get in Touch</h4>
-              <p class="text-base-content/70 mb-4">
-                For support, feature requests, or general inquiries:
-              </p>
-              <div class="flex items-center gap-2 text-base-content">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span class="font-mono">
-                  <span data-email-user="team">team</span><!--
-                  -->@<!--
-                  --><span data-email-domain="mailbloc.com">mailbloc.com</span>
-                </span>
+
+            <div class="card bg-base-200">
+              <div class="card-body">
+                <div class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  <div>
+                    <h4 class="font-semibold text-base-content mb-1">Email Support</h4>
+                    <p class="text-base-content/70 mb-2">
+                      <span data-email-user="team">team</span><!--
+                      -->@<!--
+                      --><span data-email-domain="mailbloc.com">mailbloc.com</span>
+                    </p>
+                    <p class="text-sm text-base-content/60">
+                      We're available Monday to Friday, 9am-5pm SGT
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <p class="text-base-content/70 text-sm">
-              We value your privacy and will never share your email address with third parties.
-            </p>
+
+            <div class="alert alert-info mt-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span><strong>Pro users</strong> get priority support with faster response times.</span>
+            </div>
           </div>
         </section>
       </div>
@@ -402,146 +777,141 @@
 
   <!-- JavaScript for Sidebar Toggle and Smooth Scrolling -->
   <script>
-    const sidebar = document.getElementById('sidebar');
-    const toggleButton = document.getElementById('toggleSidebar');
-    
-    toggleButton.addEventListener('click', () => {
-      sidebar.classList.toggle('hidden');
-    });
-
-    // Hide sidebar on small screens by default
-    if (window.innerWidth < 1024) {
-      sidebar.classList.add('hidden');
-    }
-
-    // Expand relevant section based on current URL hash
-    document.querySelectorAll('details.dropdown').forEach(details => {
-      const summary = details.querySelector('summary');
-      const sectionName = summary.getAttribute('data-section');
-
-      summary.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        // Close all other sections
-        document.querySelectorAll('details.dropdown').forEach(otherDetails => {
-          if (otherDetails !== details && otherDetails.hasAttribute('open')) {
-            otherDetails.removeAttribute('open');
-          }
-        });
-
-        const wasOpen = details.hasAttribute('open');
-        if (wasOpen) {
-          details.removeAttribute('open');
-        } else {
-          details.setAttribute('open', '');
-          // Update URL and scroll to section
-          if (sectionName) {
-            const sectionElement = document.getElementById(sectionName);
-            if (sectionElement) {
-              const headerOffset = 120;
-              const elementPosition = sectionElement.getBoundingClientRect().top;
-              const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-              });
-
-              history.pushState(null, null, '#' + sectionName);
-            }
-          }
-        }
-      });
-    });
-
-    // Smooth scrolling for sidebar links
-    document.querySelectorAll('aside a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-
-        if (targetElement) {
-          const headerOffset = 120;
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-
-          // Update URL with hash
-          history.pushState(null, null, '#' + targetId);
-
-          // Open parent section if clicking a sub-item
-          const parentSection = targetElement.closest('section');
-          if (parentSection && parentSection.id) {
-            const sectionDetails = document.getElementById('section-' + parentSection.id);
-            if (sectionDetails && !sectionDetails.hasAttribute('open')) {
-              // Close others and open this one
-              document.querySelectorAll('details.dropdown').forEach(d => d.removeAttribute('open'));
-              sectionDetails.setAttribute('open', '');
-            }
-          }
-
-          // Highlight active link
-          document.querySelectorAll('aside a[href^="#"]').forEach(link => {
-            link.classList.remove('font-semibold', 'text-primary');
-          });
-          this.classList.add('font-semibold', 'text-primary');
-
-          // Close sidebar on mobile after clicking
-          if (window.innerWidth < 1024) {
-            sidebar.classList.add('hidden');
-          }
-        }
-      });
-    });
-
-    // Highlight active link based on current hash on page load
-    function highlightActiveLink() {
-      const hash = window.location.hash;
-      if (hash) {
-        document.querySelectorAll('aside a[href^="#"]').forEach(link => {
-          link.classList.remove('font-semibold', 'text-primary');
-          if (link.getAttribute('href') === hash) {
-            link.classList.add('font-semibold', 'text-primary');
-          }
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('sidebar');
+      const toggleButton = document.getElementById('toggleSidebar');
+      
+      // Toggle sidebar on mobile
+      if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
         });
       }
-    }
 
-    // Run on page load
-    highlightActiveLink();
+      // Hide sidebar on small screens by default
+      if (window.innerWidth < 1024) {
+        sidebar.classList.add('hidden');
+      }
 
-    // Simple syntax highlighting - only guaranteed keywords
-    function simpleSyntaxHighlight() {
-      document.querySelectorAll('pre code').forEach((block) => {
-        let html = block.textContent;
-        
-        // Escape HTML first
-        html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        
-        // Specific keywords only (purple)
-        const keywords = 'curl|def|async|function|try|await|fetch|catch|import|from|require|begin|rescue|end|warn|public|class|private|static|void|package|type|func|return|defmodule|do|case|const|using|if|else|foreach|define';
-        html = html.replace(new RegExp('\\b(' + keywords + ')\\b', 'g'), '<span style="color: #c084fc;">$1</span>');
-        
-        // Curly brackets (cyan)
-        html = html.replace(/([{}])/g, '<span style="color: #22d3ee;">$1</span>');
-        
-        block.innerHTML = html;
+      // Expand relevant section based on current URL hash
+      document.querySelectorAll('details.dropdown').forEach(details => {
+        const summary = details.querySelector('summary');
+        const sectionName = summary.getAttribute('data-section');
+
+        summary.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Close all other sections
+          document.querySelectorAll('details.dropdown').forEach(otherDetails => {
+            if (otherDetails !== details && otherDetails.hasAttribute('open')) {
+              otherDetails.removeAttribute('open');
+            }
+          });
+
+          const wasOpen = details.hasAttribute('open');
+          if (wasOpen) {
+            details.removeAttribute('open');
+          } else {
+            details.setAttribute('open', '');
+            
+            // Update URL and scroll to section
+            if (sectionName) {
+              const sectionElement = document.getElementById(sectionName);
+              if (sectionElement) {
+                const headerOffset = 120;
+                const elementPosition = sectionElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: 'smooth'
+                });
+
+                history.pushState(null, null, '#' + sectionName);
+              }
+            }
+          }
+        });
       });
-    }
 
-    // Run after page loads
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', simpleSyntaxHighlight);
-    } else {
-      simpleSyntaxHighlight();
-    }
+      // Smooth scrolling for sidebar links
+      document.querySelectorAll('aside a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
 
-    // Run when hash changes
-    window.addEventListener('hashchange', highlightActiveLink);
+          if (targetElement) {
+            const headerOffset = 120;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+
+            // Update URL with hash
+            history.pushState(null, null, '#' + targetId);
+
+            // Highlight active link
+            document.querySelectorAll('aside a[href^="#"]').forEach(link => {
+              link.classList.remove('font-semibold', 'text-primary');
+            });
+            this.classList.add('font-semibold', 'text-primary');
+
+            // Close sidebar on mobile after clicking
+            if (window.innerWidth < 1024) {
+              sidebar.classList.add('hidden');
+            }
+          }
+        });
+      });
+
+      // Highlight active link based on current hash on page load
+      function highlightActiveLink() {
+        const hash = window.location.hash;
+        if (hash) {
+          document.querySelectorAll('aside a[href^="#"]').forEach(link => {
+            link.classList.remove('font-semibold', 'text-primary');
+            if (link.getAttribute('href') === hash) {
+              link.classList.add('font-semibold', 'text-primary');
+            }
+          });
+        }
+      }
+
+      // Run on page load
+      highlightActiveLink();
+
+      function simpleSyntaxHighlight() {
+        document.querySelectorAll('pre code').forEach((block) => {
+          let html = block.textContent;
+          
+          // Escape HTML first
+          html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          
+          // Specific keywords only (purple)
+          const keywords = 'curl|def|async|function|try|await|fetch|catch|import|from|require|begin|rescue|end|warn|public|class|private|static|void|package|type|func|return|defmodule|do|case|const|using|if|else|foreach|define|print|curl_setopt|json_decode|echo|URI|parse|puts|curl_init|curl_close|curl_exec|in_array';
+          html = html.replace(new RegExp('\\b(' + keywords + ')\\b', 'g'), '<span style="color: #c084fc;">$1</span>');
+          
+          // Curly brackets (cyan)
+          html = html.replace(/([{}])/g, '<span style="color: #22d3ee;">$1</span>');
+          
+          block.innerHTML = html;
+        });
+      }
+
+      // Run after page loads
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', simpleSyntaxHighlight);
+      } else {
+        simpleSyntaxHighlight();
+      }
+
+      // Run when hash changes
+      window.addEventListener('hashchange', highlightActiveLink);
+    });
   </script>
 </Layouts.site>

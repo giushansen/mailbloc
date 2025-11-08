@@ -8,103 +8,94 @@
             <strong>Effective Date:</strong> January 27, 2025
           </p>
           <p class="mb-6">
-            OpsBloc ("we," "us," or "our") is operated by KEYBLOC PTE. LTD. (UEN 202506039C), a company registered in Singapore. This Privacy Policy explains how we collect, use, store, and protect your information when you use opsbloc.com (the "Service").
+            Mailbloc ("we," "us," or "our") is operated by KEYBLOC PTE. LTD. (UEN 202506039C), a company registered in Singapore. This Privacy Policy explains how we collect, use, store, and protect your information when you use mailbloc.com (the "Service").
           </p>
 
           <h2 class="text-2xl font-semibold mt-8 mb-4">1. Information We Collect</h2>
           
           <h3 class="text-xl font-semibold mt-6 mb-3">1.1 Account Information</h3>
-          <p class="mb-4">When you register for OpsBloc, we collect:</p>
+          <p class="mb-4">When you register for Mailbloc, we collect:</p>
           <ul class="list-disc pl-6 mb-6">
-            <li><strong>Email address:</strong> Used for account identification and communication</li>
-            <li><strong>Password:</strong> Stored as a cryptographic hash (we never store plain-text passwords)</li>
-            <li><strong>Subscription plan:</strong> Your selected service tier (Drawbridge, Outpost, Castle, or Fortress)</li>
-            <li><strong>Timezone preference:</strong> For displaying data in your local time</li>
+            <li><strong>Email address:</strong> Used for account identification, authentication, and communication</li>
+            <li><strong>API token:</strong> Automatically generated unique identifier for API authentication</li>
+            <li><strong>Subscription plan:</strong> Your selected service tier (Free or Pro)</li>
+            <li><strong>Payment information:</strong> Processed through Stripe (we do not store credit card details)</li>
           </ul>
 
-          <h3 class="text-xl font-semibold mt-6 mb-3">1.2 Application Log Data</h3>
+          <h3 class="text-xl font-semibold mt-6 mb-3">1.2 API Usage Data</h3>
           <p class="mb-4">
-            When you send HTTP request logs to OpsBloc through our API, we collect and store the following fields:
+            When you use our API to validate email addresses and IP addresses, we temporarily process:
           </p>
           <ul class="list-disc pl-6 mb-6">
-            <li><strong>Timestamp:</strong> When the request occurred</li>
-            <li><strong>HTTP method:</strong> GET, POST, PUT, DELETE, etc.</li>
-            <li><strong>Request URL:</strong> The path and query parameters</li>
-            <li><strong>HTTP status code:</strong> 200, 404, 500, etc.</li>
-            <li><strong>Client IP address:</strong> The IP making the request to your application</li>
-            <li><strong>User agent:</strong> Browser or client information</li>
-            <li><strong>Request time:</strong> How long the request took to process (in seconds)</li>
-            <li><strong>Request body:</strong> Optional - only if you choose to send it</li>
-            <li><strong>Referer:</strong> The page that linked to the request</li>
-            <li><strong>Request ID:</strong> Your application's unique identifier for the request</li>
-            <li><strong>User identifier:</strong> Optional - your application's user ID or session</li>
+            <li><strong>Email addresses:</strong> Domains extracted for MX validation and risk classification (not stored long-term)</li>
+            <li><strong>IP addresses:</strong> Checked against threat databases for reputation analysis (not stored long-term)</li>
+            <li><strong>Request metadata:</strong> Timestamps, API token, and rate limiting information</li>
+            <li><strong>Velocity patterns (Pro plan):</strong> Aggregated patterns for ML-based fraud detection</li>
           </ul>
           <p class="mb-6">
-            <strong>Important:</strong> You have complete control over what log data you send to OpsBloc. If your logs contain sensitive information (passwords, personal health information, financial data), do not include those fields in your log forwarding configuration.
+            <strong>Important:</strong> We do not permanently store the specific email addresses or IP addresses you validate. We only retain minimal metadata necessary for rate limiting, abuse prevention, and service improvement. Individual validation queries are not logged or retained beyond processing.
           </p>
 
-          <h3 class="text-xl font-semibold mt-6 mb-3">1.3 Payment Information</h3>
-          <p class="mb-6">
-            Payment processing is handled by Stripe, a PCI-compliant payment processor. We store only your Stripe customer ID to manage your subscription. We never see or store your credit card numbers or banking information.
-          </p>
-
-          <h3 class="text-xl font-semibold mt-6 mb-3">1.4 Usage Data</h3>
-          <p class="mb-6">
-            We automatically collect technical data about your API usage, including request counts for rate limiting and quota enforcement. This data is used solely to provide the Service and enforce plan limits.
-          </p>
+          <h3 class="text-xl font-semibold mt-6 mb-3">1.3 Automatically Collected Information</h3>
+          <ul class="list-disc pl-6 mb-6">
+            <li><strong>Browser information:</strong> User agent, browser type, and version</li>
+            <li><strong>Connection data:</strong> IP address, timestamps of requests</li>
+            <li><strong>Usage patterns:</strong> API call frequency, feature usage, rate limit events</li>
+          </ul>
 
           <h2 class="text-2xl font-semibold mt-8 mb-4">2. How We Use Your Information</h2>
-          <p class="mb-4">We use the collected information to:</p>
-          <ul class="list-disc pl-6 mb-6">
-            <li>Provide and maintain the OpsBloc service</li>
-            <li>Process and store your application logs for analytics and monitoring</li>
-            <li>Send alert notifications when configured thresholds are exceeded</li>
-            <li>Enforce rate limits and subscription quotas</li>
-            <li>Process payments and manage subscriptions</li>
-            <li>Communicate with you about service updates or account issues</li>
-            <li>Detect and prevent security threats or abuse of the Service</li>
-            <li>Comply with legal obligations</li>
-          </ul>
-          <p class="mb-6">
-            We do not use your log data for advertising, marketing to third parties, or any purpose other than providing the OpsBloc service to you.
-          </p>
-
-          <h2 class="text-2xl font-semibold mt-8 mb-4">3. Data Storage and Security</h2>
-          
-          <h3 class="text-xl font-semibold mt-6 mb-3">3.1 Where We Store Data</h3>
           <p class="mb-4">
-            Your data is hosted on secure cloud infrastructure (e.g., Vultr data centers) with robust encryption and access controls. We use:
+            We use collected information for:
           </p>
           <ul class="list-disc pl-6 mb-6">
-            <li><strong>Account data:</strong> Stored in a secure OLTP database with encryption at rest to protect personal information.</li>
-            <li><strong>Log data:</strong> Stored in an analytical database optimized for high-volume processing and fast queries.</li>
-            <li><strong>Session data:</strong> Stored in-memory for quick, secure authentication during your use of the platform.</li>
+            <li><strong>Service provision:</strong> Processing API requests, performing email and IP validation</li>
+            <li><strong>Account management:</strong> Authentication, billing, and subscription management</li>
+            <li><strong>Rate limiting:</strong> Enforcing plan limits and preventing abuse</li>
+            <li><strong>Fraud detection:</strong> Identifying and blocking malicious usage patterns</li>
+            <li><strong>Service improvement:</strong> Enhancing validation accuracy and detection algorithms</li>
+            <li><strong>Communication:</strong> Sending service updates, security alerts, and billing notifications</li>
+            <li><strong>Support:</strong> Responding to inquiries and troubleshooting issues</li>
+            <li><strong>Legal compliance:</strong> Meeting regulatory requirements and enforcing our Terms</li>
           </ul>
 
-          <h3 class="text-xl font-semibold mt-6 mb-3">3.2 Security Measures</h3>
-          <p class="mb-4">We implement industry-standard security practices:</p>
-          <ul class="list-disc pl-6 mb-6">
-            <li>Passwords are hashed using bcrypt before storage</li>
-            <li>All data transmission uses TLS/SSL encryption</li>
-            <li>API authentication via secure bearer tokens</li>
-            <li>Rate limiting to prevent abuse</li>
-            <li>Regular security updates and monitoring</li>
-          </ul>
-          <p class="mb-6">
-            However, no method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.
-          </p>
-
-          <h2 class="text-2xl font-semibold mt-8 mb-4">4. Data Sharing and Disclosure</h2>
+          <h2 class="text-2xl font-semibold mt-8 mb-4">3. Data Sharing and Disclosure</h2>
           <p class="mb-4">
-            We do not sell, rent, or trade your personal information or log data to third parties. We may share limited information only in these circumstances:
+            We do NOT sell, rent, or trade your personal information. We only share data in the following limited circumstances:
           </p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-3">3.1 Service Providers</h3>
           <ul class="list-disc pl-6 mb-6">
-            <li><strong>Payment processing:</strong> Your email and Stripe customer ID are shared with Stripe to process payments</li>
-            <li><strong>Legal requirements:</strong> We may disclose information if required by law, court order, or government regulation</li>
-            <li><strong>Service protection:</strong> We may disclose information to protect the rights, property, or safety of OpsBloc, our users, or the public</li>
+            <li><strong>Stripe:</strong> Payment processing (PCI-DSS compliant)</li>
+            <li><strong>Hosting providers:</strong> Infrastructure and data storage</li>
+            <li><strong>Email service:</strong> Transactional emails (account verification, notifications)</li>
           </ul>
           <p class="mb-6">
-            We do not use third-party analytics, advertising networks, or marketing platforms that would have access to your data.
+            All service providers are bound by confidentiality agreements and process data only as instructed.
+          </p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-3">3.2 Legal Requirements</h3>
+          <p class="mb-6">
+            We may disclose information when required by law, court order, or government request, or to protect our rights, property, or safety.
+          </p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-3">3.3 Business Transfers</h3>
+          <p class="mb-6">
+            If KEYBLOC PTE. LTD. is acquired or merged, your information may be transferred to the new entity. We will notify you before your data becomes subject to a different privacy policy.
+          </p>
+
+          <h2 class="text-2xl font-semibold mt-8 mb-4">4. Data Security</h2>
+          <p class="mb-4">
+            We implement industry-standard security measures:
+          </p>
+          <ul class="list-disc pl-6 mb-6">
+            <li><strong>Encryption:</strong> TLS 1.3 for data in transit, AES-256 for data at rest</li>
+            <li><strong>Access controls:</strong> Role-based permissions and authentication</li>
+            <li><strong>API security:</strong> Token-based authentication with rate limiting</li>
+            <li><strong>Infrastructure:</strong> Secure cloud hosting with regular security audits</li>
+            <li><strong>Monitoring:</strong> Continuous threat detection and incident response</li>
+          </ul>
+          <p class="mb-6">
+            However, no method of transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.
           </p>
 
           <h2 class="text-2xl font-semibold mt-8 mb-4">5. Data Retention</h2>
@@ -113,11 +104,13 @@
           </p>
           <ul class="list-disc pl-6 mb-6">
             <li><strong>Account data:</strong> Retained for the lifetime of your account, plus 30 days after deletion to allow for recovery</li>
-            <li><strong>Log data:</strong> Retained according to your subscription plan (typically 7-90 days), then automatically deleted</li>
+            <li><strong>API validation queries:</strong> Not stored permanently; processed in real-time and discarded immediately after returning results</li>
+            <li><strong>Rate limiting data:</strong> Retained for 60 minutes (sliding window)</li>
+            <li><strong>Aggregated velocity patterns:</strong> Retained for 90 days for ML model training (Pro plan only)</li>
             <li><strong>Payment records:</strong> Retained for 7 years to comply with Singapore tax and financial regulations</li>
           </ul>
           <p class="mb-6">
-            You can manually delete individual logs or all logs for an application at any time through the dashboard.
+            You can request account deletion at any time, which will permanently erase all associated data within 30 days.
           </p>
 
           <h2 class="text-2xl font-semibold mt-8 mb-4">6. Your Rights</h2>
@@ -131,7 +124,7 @@
             <li><strong>Right to rectification:</strong> Correct inaccurate or incomplete data</li>
             <li><strong>Right to erasure:</strong> Request deletion of your data ("right to be forgotten")</li>
             <li><strong>Right to restrict processing:</strong> Limit how we use your data</li>
-            <li><strong>Right to data portability:</strong> Receive your data in a machine-readable format (CSV export)</li>
+            <li><strong>Right to data portability:</strong> Receive your data in a machine-readable format</li>
             <li><strong>Right to object:</strong> Object to processing based on legitimate interests</li>
             <li><strong>Right to withdraw consent:</strong> Withdraw consent at any time</li>
           </ul>
@@ -143,8 +136,19 @@
             <li><strong>Withdrawal:</strong> Withdraw consent for data collection (may impact service availability)</li>
           </ul>
 
+          <h3 class="text-xl font-semibold mt-6 mb-3">6.3 CCPA Rights (California Users)</h3>
+          <ul class="list-disc pl-6 mb-6">
+            <li><strong>Right to know:</strong> What personal information we collect and how it's used</li>
+            <li><strong>Right to delete:</strong> Request deletion of personal information</li>
+            <li><strong>Right to opt-out:</strong> We do not sell personal information, so no opt-out is necessary</li>
+          </ul>
+
           <p class="mb-6">
-            To exercise any of these rights, contact us at <span class="font-mono">team<span>@</span>opsbloc.com</span>. We will respond within 30 days.
+            To exercise any of these rights, contact us at <span class="font-mono">
+                <span data-email-user="team">team</span><!--
+                  -->@<!--
+                  --><span data-email-domain="mailbloc.com">mailbloc.com</span>
+                </span>. We will respond within 30 days.
           </p>
 
           <h2 class="text-2xl font-semibold mt-8 mb-4">7. Cookies and Tracking</h2>
@@ -159,7 +163,7 @@
 
           <h2 class="text-2xl font-semibold mt-8 mb-4">9. Children's Privacy</h2>
           <p class="mb-6">
-            OpsBloc is not intended for users under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately.
+            Mailbloc is not intended for users under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately.
           </p>
 
           <h2 class="text-2xl font-semibold mt-8 mb-4">10. Changes to This Policy</h2>
@@ -177,9 +181,9 @@
             <p class="mb-2">Email: <span class="font-mono">
                 <span data-email-user="team">team</span><!--
                   -->@<!--
-                  --><span data-email-domain="opsbloc.com">opsbloc.com</span>
+                  --><span data-email-domain="mailbloc.com">mailbloc.com</span>
                 </span></p>
-              <p class="mb-2">Website: <a href="https://opsbloc.com" class="link link-primary">opsbloc.com</a>
+              <p class="mb-2">Website: <a href="https://mailbloc.com" class="link link-primary">mailbloc.com</a>
             </p>
           </div>
 
