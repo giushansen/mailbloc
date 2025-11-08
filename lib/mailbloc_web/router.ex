@@ -33,7 +33,10 @@ defmodule MailblocWeb.Router do
     get "/terms", PageController, :terms
 
     get "/vs", PageController, :vs
-    get "/vs/datadog", PageController, :vs_datadog
+    get "/vs/ipqs", PageController, :vs_ipqs
+    get "/vs/castle", PageController, :vs_castle
+    get "/vs/apivoid", PageController, :vs_apivoid
+    get "/vs/antideo", PageController, :vs_antideo
 
     get "/not-found", NotFoundController, :show
   end

@@ -31,17 +31,38 @@ defmodule MailblocWeb.PageController do
     |> render(:terms)
   end
 
-  def vs_datadog(conn, _params) do
-    conn
-    |> assign(:page_title, "Opsbloc vs Datadog: Affordable Web App Monitoring Alternative")
-    |> assign(:meta_description, "Compare Opsbloc and Datadog for web application monitoring. See pricing, features, and why SMBs choose Opsbloc for integrated performance and security monitoring.")
-    |> render(:vs_datadog)
-  end
-
   def vs(conn, _params) do
     conn
-    |> assign(:page_title, "Opsbloc: Affordable Web App Monitoring Alternative")
-    |> assign(:meta_description, "Compare Opsbloc and others for web application monitoring. See pricing, features, and why SMBs choose Opsbloc for integrated performance and security monitoring.")
+    |> assign(:page_title, "Mailbloc vs Competitors: Email & IP Validation Comparison")
+    |> assign(:meta_description, "Compare Mailbloc with IPQS, Castle.io, APIVoid, and Antideo for email and IP validation. See features, pricing, and which fraud prevention tool is best for stopping fake sign-ups.")
     |> render(:vs)
+  end
+
+  def vs_ipqs(conn, _params) do
+    conn
+    |> assign(:page_title, "Mailbloc vs IPQS: Forever Free Alternative for Email & IP Validation")
+    |> assign(:meta_description, "Compare Mailbloc and IPQS for fraud prevention. Get unlimited free API calls vs 5K/month limit. Save $1,932+ annually with simple, developer-friendly signup validation at $39/mo vs $100s-$1,000s.")
+    |> render(:vs_ipqs)
+  end
+
+  def vs_castle(conn, _params) do
+    conn
+    |> assign(:page_title, "Mailbloc vs Castle.io: Simple Signup Validation vs Account Security")
+    |> assign(:meta_description, "Compare Mailbloc and Castle.io for preventing fake signups. Forever free unlimited API calls vs 1K/month. Save $51,532 annually with focused email/IP validation at $39/mo vs enterprise pricing.")
+    |> render(:vs_castle)
+  end
+
+  def vs_apivoid(conn, _params) do
+    conn
+    |> assign(:page_title, "Mailbloc vs APIVoid: Application Signup Validation vs Threat Intelligence")
+    |> assign(:meta_description, "Compare Mailbloc and APIVoid for email and IP validation. Developer-friendly signup blocking vs security analyst toolkit. One simple endpoint vs 20+ APIs for different use cases.")
+    |> render(:vs_apivoid)
+  end
+
+  def vs_antideo(conn, _params) do
+    conn
+    |> assign(:page_title, "Mailbloc vs Antideo: Unlimited Free vs 10 Requests Per Hour")
+    |> assign(:meta_description, "Compare Mailbloc and Antideo for email and IP validation. Production-ready unlimited free plan vs restrictive 10 req/hour limit. ML-powered detection at $39/mo vs basic validation at $5-50/mo.")
+    |> render(:vs_antideo)
   end
 end

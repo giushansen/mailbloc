@@ -177,13 +177,15 @@ defmodule MailblocWeb.Layouts do
         </div>
 
         <!-- Comparisons Section -->
-        <%!-- <div class="w-full">
+        <div class="w-full">
           <h3 class="text-sm font-semibold text-base-content mb-3"><a href="/vs" class="link link-hover">Compare Mailbloc</a></h3>
           <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-            <a href="/vs/datadog" class="link link-hover">vs Datadog</a>
-            <a href="/vs/newrelic" class="link link-hover">vs New Relic</a>
+            <a href="/vs/ipqs" class="link link-hover">vs IPQS</a>
+            <a href="/vs/castle" class="link link-hover">vs Castle.io</a>
+            <a href="/vs/apivoid" class="link link-hover">vs APIVoid</a>
+            <a href="/vs/antideo" class="link link-hover">vs Antideo</a>
           </div>
-        </div> --%>
+        </div>
 
         <!-- Resources Section -->
         <div class="w-full border-t border-base-content/10 pt-4">

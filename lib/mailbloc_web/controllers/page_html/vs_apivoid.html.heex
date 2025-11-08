@@ -1,0 +1,504 @@
+<Layouts.site flash={@flash} current_scope={@current_scope}>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Mailbloc vs APIVoid: Pricing & Feature Comparison",
+    "description": "Compare Mailbloc and APIVoid for email and IP validation. Signup-focused simplicity vs security analyst toolkit. Forever free vs tiered pricing.",
+    "url": "https://mailbloc.com/vs/apivoid"
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <section class="hero bg-base-200 py-16">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-base-content mb-6">
+        Mailbloc vs APIVoid: Signup Validation vs Threat Intelligence
+      </h1>
+      <p class="text-base sm:text-lg text-base-content/70 mb-8 max-w-3xl mx-auto">
+        Compare Mailbloc and APIVoid for fraud prevention. Developer-friendly signup blocking vs 
+        security analyst toolkit with multiple APIs.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/users/register" class="btn btn-primary btn-lg">
+          Start Free Forever
+        </a>
+        <a href="/pricing" class="btn btn-outline btn-lg">
+          View Pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- At a Glance Comparison -->
+  <section class="py-16 bg-base-100">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-8 text-center">
+        Mailbloc vs APIVoid at a Glance
+      </h2>
+      
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th class="text-left">Feature</th>
+              <th class="text-center">Mailbloc</th>
+              <th class="text-center">APIVoid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-semibold">Primary Use Case</td>
+              <td class="text-center">Stopping fake signups</td>
+              <td class="text-center">Threat intelligence/SIEM</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Target Audience</td>
+              <td class="text-center">Developers, SaaS builders</td>
+              <td class="text-center">Security analysts, SOC teams</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Free Plan</td>
+              <td class="text-center">Unlimited API calls</td>
+              <td class="text-center">Limited requests</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Pricing</td>
+              <td class="text-center">$0 or $39/month</td>
+              <td class="text-center">$50-500+/month</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Email Validation</td>
+              <td class="text-center">✅ Full (MX, disposable, reputation)</td>
+              <td class="text-center">✅ Yes (reputation-focused)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">IP Reputation</td>
+              <td class="text-center">✅ Yes (70+ blocklists)</td>
+              <td class="text-center">✅ Yes (extensive)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">URL/Domain Scanning</td>
+              <td class="text-center">❌ No (focused scope)</td>
+              <td class="text-center">✅ Yes (malware, phishing)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">SSL Certificate Analysis</td>
+              <td class="text-center">❌ No</td>
+              <td class="text-center">✅ Yes</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">DNS Lookups</td>
+              <td class="text-center">✅ MX only</td>
+              <td class="text-center">✅ Comprehensive</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Number of APIs</td>
+              <td class="text-center">1 unified endpoint</td>
+              <td class="text-center">20+ separate APIs</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Integration Complexity</td>
+              <td class="text-center">Very simple (1 endpoint)</td>
+              <td class="text-center">Complex (many endpoints)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">SIEM Integration</td>
+              <td class="text-center">❌ Not designed for this</td>
+              <td class="text-center">✅ Yes (primary use case)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Setup Time</td>
+              <td class="text-center">2 minutes</td>
+              <td class="text-center">5-10 minutes</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Best For</td>
+              <td class="text-center">Application signup validation</td>
+              <td class="text-center">Security operations/analysis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Comparison -->
+  <section class="py-16 bg-base-200">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-12 text-center">
+        Detailed Comparison: Features, Pricing & More
+      </h2>
+
+      <!-- Different Problems -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">🎯 Different Tools for Different Jobs</h3>
+        
+        <div class="alert alert-info mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <div>
+            <h4 class="font-bold">Key Insight:</h4>
+            <p>Mailbloc and APIVoid target fundamentally different use cases. If you're building an 
+            application with signups, use Mailbloc. If you're a security analyst investigating threats, use APIVoid.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-primary mb-3">Mailbloc is Built For:</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ <strong>SaaS applications</strong> with user signups</li>
+                <li>✅ <strong>Marketplaces</strong> preventing fake sellers/buyers</li>
+                <li>✅ <strong>Communities</strong> blocking spam accounts</li>
+                <li>✅ <strong>Newsletter signups</strong> from disposable emails</li>
+                <li>✅ <strong>Any signup form</strong> needing validation</li>
+              </ul>
+              <p class="mt-4 text-sm font-semibold">
+                💡 Goal: "Is this signup legitimate?"
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold mb-3">APIVoid is Built For:</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ <strong>Security Operations Centers</strong> (SOCs)</li>
+                <li>✅ <strong>Threat intelligence</strong> platforms</li>
+                <li>✅ <strong>SIEM integrations</strong> (Splunk, etc.)</li>
+                <li>✅ <strong>Malware analysis</strong> workflows</li>
+                <li>✅ <strong>Security researchers</strong> investigating threats</li>
+              </ul>
+              <p class="mt-4 text-sm font-semibold">
+                💡 Goal: "What do we know about this indicator?"
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">💰 Pricing: Simple vs Tiered</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-primary mb-3">Mailbloc Pricing</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ <strong>Free Forever:</strong> Unlimited API calls</li>
+                <li>✅ <strong>Pro: $39/month</strong> flat rate</li>
+                <li>✅ All features included</li>
+                <li>✅ No per-request fees</li>
+                <li>✅ Transparent pricing</li>
+              </ul>
+              <div class="mt-4 p-4 bg-success/10 rounded-lg">
+                <p class="text-sm font-semibold text-success">
+                  💡 Perfect for application developers
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold mb-3">APIVoid Pricing</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>⚠️ Multiple tiered plans</li>
+                <li>⚠️ Based on monthly API requests</li>
+                <li>⚠️ Different APIs may count separately</li>
+                <li>⚠️ Typical range: $50-500+/month</li>
+                <li>⚠️ More features = higher tiers</li>
+              </ul>
+              <div class="mt-4 p-4 bg-warning/10 rounded-lg">
+                <p class="text-sm font-semibold text-warning">
+                  ⚠️ Designed for security team budgets
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Scope -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">⚡ Feature Scope: Focused vs Comprehensive</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-primary mb-3">Mailbloc Features</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ Email validation (syntax, MX, SMTP)</li>
+                <li>✅ Disposable email detection</li>
+                <li>✅ IP reputation (70+ blocklists)</li>
+                <li>✅ Proxy/VPN/TOR detection</li>
+                <li>✅ Simple risk levels (HIGH/MEDIUM/LOW/NONE)</li>
+                <li>✅ ML-powered detection (Pro)</li>
+                <li>❌ No URL scanning</li>
+                <li>❌ No SSL analysis</li>
+                <li>❌ No domain reputation</li>
+              </ul>
+              <p class="mt-4 text-sm">
+                <strong>Philosophy:</strong> Do one thing exceptionally well
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold mb-3">APIVoid Features</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ Email verification API</li>
+                <li>✅ IP reputation API</li>
+                <li>✅ Domain reputation API</li>
+                <li>✅ URL reputation API</li>
+                <li>✅ SSL certificate API</li>
+                <li>✅ DNS lookup API</li>
+                <li>✅ WHOIS API</li>
+                <li>✅ Domain age API</li>
+                <li>✅ 20+ separate APIs</li>
+              </ul>
+              <p class="mt-4 text-sm">
+                <strong>Philosophy:</strong> Comprehensive threat intelligence toolkit
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integration -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">🚀 Integration: 1 Endpoint vs 20+ APIs</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-primary mb-3">Mailbloc Integration</h4>
+                <pre class="bg-base-300 p-3 rounded text-xs mt-2"><code class="text-gray-800"><%= ~S"""
+              GET 'https://api.mailbloc.com/check?email=fake@email.com&ip=1.12.1.12’\
+              -H "Authorization: Bearer {YOUR_API_KEY}”
+
+              Response:
+              
+              {"risk_level": "high", "reasons": ["disposable_email", "datacenter_ip"]} // Done!
+                """ %></code></pre>
+              <p class="text-sm text-base-content/80">
+                <strong>One endpoint.</strong> Send email + IP, get clear risk level. Done in 2 minutes.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold mb-3">APIVoid Integration</h4>
+              <pre class="bg-base-300 p-3 rounded text-xs mb-3">
+        POST /v2/email-reputation
+        POST /v2/ip-reputation  
+        POST /v2/domain-reputation
+        POST /v2/url-status
+        // 20+ different endpoints...
+
+        Each returns different JSON structures
+        with various data points to interpret
+              </pre>
+              <p class="text-sm text-base-content/80">
+                <strong>Multiple APIs.</strong> Choose which to call, parse different responses. Great for 
+                security analysis, complex for signup validation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- When to Choose Each -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-base-content mb-4">🤔 Which Should You Choose?</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-primary/10 shadow-lg border-2 border-primary">
+            <div class="card-body">
+              <h4 class="text-xl font-bold text-primary mb-3">Choose Mailbloc if:</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>✅ You're building an application with signups</li>
+                <li>✅ You want simple integration (one endpoint)</li>
+                <li>✅ You need clear risk classifications</li>
+                <li>✅ Budget matters (free plan is generous)</li>
+                <li>✅ You're a developer, not a security analyst</li>
+                <li>✅ Email and IP validation is your main need</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h4 class="text-xl font-bold mb-3">Choose APIVoid if:</h4>
+              <ul class="space-y-2 text-base-content/80">
+                <li>• You're a security analyst or SOC team</li>
+                <li>• You need threat intelligence data</li>
+                <li>• You're integrating with SIEM (Splunk, etc.)</li>
+                <li>• You need URL/domain scanning</li>
+                <li>• You're investigating malware or phishing</li>
+                <li>• You need comprehensive security APIs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Side by Side Example -->
+  <section class="py-16 bg-base-100">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-8 text-center">
+        Same Question, Different Approaches
+      </h2>
+
+      <div class="card bg-base-200 shadow-lg">
+        <div class="card-body">
+          <h3 class="text-xl font-bold mb-4">
+            Question: "Should I allow this user to sign up?"
+          </h3>
+          
+          <div class="grid md:grid-cols-2 gap-8 mt-6">
+            <div>
+              <h4 class="font-bold text-primary mb-3">Mailbloc Approach:</h4>
+              <div class="bg-base-300 p-4 rounded text-sm space-y-2">
+                <p>1. One API call with email + IP</p>
+                <p>2. Get clear answer: "HIGH" risk</p>
+                <p>3. Block signup immediately</p>
+                <p class="text-success font-semibold">✅ Done in one request</p>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="font-bold mb-3">APIVoid Approach:</h4>
+              <div class="bg-base-300 p-4 rounded text-sm space-y-2">
+                <p>1. Call email reputation API</p>
+                <p>2. Call IP reputation API</p>
+                <p>3. Parse multiple data points</p>
+                <p>4. Write custom logic to decide</p>
+                <p class="text-warning font-semibold">⚠️ Multiple calls + custom logic</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info mt-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <p><strong>The Difference:</strong> APIVoid gives you raw threat intelligence data. Mailbloc gives you 
+            an answer. Both are valuable, but for different use cases.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-base-200">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-base-content mb-8 text-center">
+        Common Questions
+      </h2>
+
+      <div class="space-y-4">
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" checked />
+          <div class="collapse-title text-lg font-semibold">
+            Can I use APIVoid for signup validation?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              Yes, but it's like using a Swiss Army knife when you just need a can opener. APIVoid's email 
+              and IP reputation APIs work fine for signup validation, but you'll need to call multiple endpoints, 
+              parse different response formats, and build your own risk scoring logic. Mailbloc does this for you.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            Is APIVoid's data more comprehensive than Mailbloc's?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              For threat intelligence, yes. APIVoid has 20+ APIs covering URLs, domains, SSL certificates, DNS, 
+              and more. But for signup validation specifically, both check the same core blocklists and reputation 
+              sources. The extra data in APIVoid is valuable for security analysis but overkill for signup fraud.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            Why would I choose APIVoid over Mailbloc?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              Choose APIVoid if you're a security analyst, SOC team, or need to integrate threat intelligence into 
+              a SIEM platform. It's designed for comprehensive security operations, not application signup validation. 
+              If you're building an app and just need to stop fake signups, Mailbloc is the better fit.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            Does Mailbloc integrate with SIEMs?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              No, Mailbloc is not designed for SIEM integration. It's built for real-time application signup 
+              validation. If you need SIEM integration, URL scanning, or comprehensive threat intelligence, 
+              APIVoid is the right choice.
+            </p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-plus bg-base-200">
+          <input type="radio" name="faq-accordion" />
+          <div class="collapse-title text-lg font-semibold">
+            Which has better documentation?
+          </div>
+          <div class="collapse-content">
+            <p class="text-base-content/80">
+              Both have good docs, but they serve different needs. Mailbloc's docs focus on getting signup 
+              validation working in 2 minutes. APIVoid's docs cover 20+ APIs with various use cases. For signup 
+              validation specifically, Mailbloc's docs are more focused and easier to follow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-primary/10">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-base-content mb-6">
+        Built for Developers, Not Security Analysts
+      </h2>
+      <p class="text-lg text-base-content/70 mb-8 max-w-2xl mx-auto">
+        Stop fake signups with one simple API endpoint. No complex threat intelligence dashboards, 
+        no multiple APIs, no security degree required. Forever free plan.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/users/register" class="btn btn-primary btn-lg">
+          Start Free Forever
+        </a>
+        <a href="/help" class="btn btn-outline btn-lg">
+          View Documentation
+        </a>
+      </div>
+      <p class="text-sm text-base-content/60 mt-6">
+        No credit card required • One endpoint integration • Clear risk levels
+      </p>
+    </div>
+  </section>
+
+</Layouts.site>
