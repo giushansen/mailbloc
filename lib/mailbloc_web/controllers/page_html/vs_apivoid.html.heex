@@ -278,12 +278,12 @@
             <div class="card-body">
               <h4 class="text-xl font-bold text-primary mb-3">Mailbloc Integration</h4>
                 <pre class="bg-base-300 p-3 rounded text-xs mt-2"><code class="text-gray-800"><%= ~S"""
-              GET 'https://api.mailbloc.com/check?email=fake@email.com&ip=1.12.1.12’\
-              -H "Authorization: Bearer {YOUR_API_KEY}”
+                  GET 'https://api.mailbloc.com/check?email=fake@email.com&ip=1.12.1.12’\
+                  -H "Authorization: Bearer {YOUR_API_KEY}”
 
-              Response:
-              
-              {"risk_level": "high", "reasons": ["disposable_email", "datacenter_ip"]} // Done!
+                  Response:
+                  
+                  {"risk_level": "high", "reasons": ["disposable_email", "datacenter_ip"]} // Done!
                 """ %></code></pre>
               <p class="text-sm text-base-content/80">
                 <strong>One endpoint.</strong> Send email + IP, get clear risk level. Done in 2 minutes.

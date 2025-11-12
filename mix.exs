@@ -59,14 +59,20 @@ defmodule Mailbloc.MixProject do
        app: false,
        compile: false,
        depth: 1},
-      {:swoosh, "~> 1.16"},
+      {:swoosh, "~> 1.18.4"},
+      {:multipart, "~> 0.4.0"},
+      {:hackney, "~> 1.23"},
       {:req, "~> 0.5"},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:remote_ip, "~> 1.2"},
+      {:bandit, "~> 1.6.11"},
+      {:error_tracker, "~> 0.6"},
+      {:finch, "~> 0.19"},
+      {:stripity_stripe, "~> 3.2"},
     ]
   end
 

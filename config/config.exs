@@ -24,6 +24,12 @@ config :mailbloc,
   ecto_repos: [Mailbloc.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
+config :error_tracker,
+  repo: Mailbloc.Repo,
+  otp_app: :mailbloc,
+  enabled: true,
+  prefix: "error_tracker"
+
 # Configures the endpoint
 config :mailbloc, MailblocWeb.Endpoint,
   url: [host: "localhost"],
@@ -72,6 +78,8 @@ config :logger, :default_formatter,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :mailbloc, :stripe_client, Mailbloc.StripeClient
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
