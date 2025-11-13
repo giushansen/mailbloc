@@ -8,10 +8,17 @@ To start your Phoenix server:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 # API call
+
+## Dev
 ```
 $ curl "http://api.localhost:4000/check?email=team@1-tm.com&ip=1.19.1.18" -H "Authorization: Bearer 1e2878119f4ef3288695c73d5c01b105ee12d50a9f92b00136f6a46e65f7b2c0"
 
 {"risk_level":"high","reasons":["disposable_email","criminal_network_ip"]}
+```
+
+## Prod
+```
+curl "https://api.mailbloc.com/check?email=team@1-tm.com&ip=1.19.1.18" -H "Authorization: Bearer 1e2878119f4ef3288695c73d5c01b105ee12d50a9f92b00136f6a46e65f7b2c0"
 ```
 
 # Check status
