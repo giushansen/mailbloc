@@ -39,7 +39,7 @@ defmodule Mailbloc.BlocklistLoader do
     create_all_ets_tables()
 
     # In test mode, just create empty tables and skip loading
-    {last_update, last_status} = if Mix.env() == :test do
+    {last_update, last_status} = if Application.get_env(:mailbloc, :env) == :test do
       Logger.info("[BlocklistLoader] Test mode - empty tables")
       {nil, :ok}
     else
@@ -63,7 +63,7 @@ defmodule Mailbloc.BlocklistLoader do
     }
 
     # Schedule background updates (only in non-test mode)
-    unless Mix.env() == :test do
+    unless Application.get_env(:mailbloc, :env) == :test do
       schedule_update()
     end
 
@@ -241,7 +241,7 @@ defmodule Mailbloc.BlocklistLoader do
         :ok
 
       {:error, _reason} ->
-        if Mix.env() == :test, do: :ok, else: {:error, :file_not_found}
+        if Application.get_env(:mailbloc, :env) == :test, do: :ok, else: {:error, :file_not_found}
     end
   end
 

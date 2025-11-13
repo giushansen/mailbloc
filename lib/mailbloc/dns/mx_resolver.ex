@@ -169,7 +169,7 @@ defmodule Mailbloc.DNS.MXResolver do
         # Sort by priority (lower number = higher priority)
         sorted = Enum.sort_by(mx, fn {priority, _host} -> priority end)
 
-        if Mix.env() != :test do
+        if Application.get_env(:mailbloc, :env) != :test do
           Logger.debug("[MXResolver] #{domain} → #{name} (#{format_ip(ip)}:#{port})")
         end
 

@@ -20,7 +20,7 @@ defmodule Mailbloc.RateLimitLoader do
     :ets.new(:api_rate_limit, [:set, :public, :named_table, read_concurrency: true])
 
     # In test mode, don't query database - just use empty table
-    if Mix.env() == :test do
+    if Application.get_env(:mailbloc, :env) == :test do
       Logger.info("[RateLimitLoader] Test mode - empty table")
       {:ok, %{}}
     else
