@@ -86,7 +86,7 @@ if config_env() == :prod do
     url: [host: host, port: 443, scheme: "https"],
     https: [
       ip: {0, 0, 0, 0},
-      port: 4000,
+      port: port,
       cipher_suite: :strong,
       certfile: System.get_env("SSL_CERT_FILE"),
       keyfile: System.get_env("SSL_KEY_FILE")
