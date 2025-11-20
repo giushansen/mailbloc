@@ -93,11 +93,11 @@ if config_env() == :prod do
       port: port
     ],
     https: [
-    ip: {0, 0, 0, 0},
-    port: 4001,
-    cipher_suite: :strong,
-    certfile: System.get_env("SSL_CERT_PATH"),
-    keyfile: System.get_env("SSL_KEY_PATH")
+      ip: {0, 0, 0, 0},
+      port: 4001,
+      cipher_suite: :strong,
+      certfile: System.get_env("SSL_CERT_FILE"),
+      keyfile: System.get_env("SSL_KEY_FILE")
     ],
     secret_key_base: secret_key_base
 
