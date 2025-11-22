@@ -9,7 +9,7 @@ defmodule Mailbloc.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Mailbloc", "contact@example.com"})
+      |> from({"Mailbloc", "team@mailbloc.com"})
       |> subject(subject)
       |> text_body(body)
 
