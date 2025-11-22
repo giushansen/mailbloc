@@ -28,7 +28,7 @@ config :logger,
   ],
   default_formatter: [
     format: "$dateT$time [$level] $metadata$message\n",
-    metadata: [:request_id, :method, :path, :status, :response_time, :remote_ip, :query_string, :request_headers]
+    metadata: [:request_id, :remote_ip, :user_email, :method, :path, :status, :response_time, :remote_ip, :query_string, :request_headers]
   ]
 
 # Disable LiveDashboard and LiveReloader logging
