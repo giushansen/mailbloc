@@ -3,7 +3,6 @@ defmodule MailblocWeb.LoggerMetadataPlug do
   Adds remote IP and user email to Logger metadata for every request.
   Lightweight and efficient - just sets metadata, no heavy processing.
   """
-  import Plug.Conn
 
   def init(opts), do: opts
 
