@@ -94,7 +94,8 @@ defmodule Mailbloc.RiskClassifier do
       {:week_attacker_ip, "week_attacker_ip"},
       {:suspicious_ip, "suspicious_ip"},
       {:vpn_ip, "vpn_ip"},
-      {:datacenter_ip, "datacenter_ip"}
+      {:datacenter_ip, "datacenter_ip"},
+      {:old_attacker_ip, "old_attacker_ip"}
     ]
     |> find_match(ip)
   end
@@ -102,7 +103,6 @@ defmodule Mailbloc.RiskClassifier do
   defp check_low_risk_ip(ip) do
     [
       {:reported_ip, "reported_ip"},
-      {:old_attacker_ip, "old_attacker_ip"}
     ]
     |> find_match(ip)
   end
