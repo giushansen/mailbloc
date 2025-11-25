@@ -227,6 +227,16 @@
               </table>
             </div>
             <p class="text-sm text-base-content/60 mt-2">* At least one of <code>email</code> or <code>ip</code> must be provided</p>
+            <h4 class="font-semibold text-base-content mb-2 mt-6">Example Request</h4>
+            <p class="text-base-content/70 mb-2">
+              Here's a quick example using curl:
+            </p>
+            <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-sm">
+              <pre><code class="text-gray-300"><%= ~S"""
+              curl -H "Authorization: Bearer YOUR_API_TOKEN" \
+                "https://api.mailbloc.com/check?email=test@example.com&ip=1.19.1.18"
+              """ %></code></pre>
+            </div>
           </div>
 
           <!-- Response Format -->
@@ -372,6 +382,18 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <h4 class="font-semibold text-base-content mb-2 mt-6">Example Error Response</h4>
+            <p class="text-base-content/70 mb-2">
+              When validation fails, the API returns a structured error:
+            </p>
+            <div class="mockup-code bg-gray-800 shadow-lg max-w-[90vw] sm:max-w-2xl mx-auto text-sm">
+              <pre><code class="text-gray-300"><%= ~S"""
+              {
+                "error": "invalid_email",
+                "message": "Email must contain '@' and be properly formatted"
+              }
+              """ %></code></pre>
             </div>
           </div>
 

@@ -84,8 +84,8 @@ config :phoenix_live_view,
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
 
-config :inputbloc, Inputbloc.Mailer, adapter: Swoosh.Adapters.Local
-# config :inputbloc, Inputbloc.Mailer,
+config :mailbloc, Mailbloc.Mailer, adapter: Swoosh.Adapters.Local
+# config :mailbloc, Mailbloc.Mailer,
 #   adapter: Swoosh.Adapters.Mailgun,
 #   api_key: System.get_env("MAILGUN_API_KEY"),
 #   domain: System.get_env("MAILGUN_DOMAIN")

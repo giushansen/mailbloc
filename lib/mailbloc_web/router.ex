@@ -11,6 +11,7 @@ defmodule MailblocWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_scope_for_user
+    plug :put_sess_ip
   end
 
   pipeline :api do
@@ -98,5 +99,14 @@ defmodule MailblocWeb.Router do
     pipe_through :browser
 
     match :*, "/*path", NotFoundController, :show
+  end
+
+  defp put_sess_ip(conn, _opts) do
+    ip =
+      conn.remote_ip
+      |> :inet.ntoa()
+      |> to_string()
+
+    put_session(conn, :remote_ip, ip)
   end
 end

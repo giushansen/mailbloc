@@ -39,19 +39,19 @@ defmodule Mailbloc.BlocklistLoader do
     create_all_ets_tables()
 
     # In test mode, just create empty tables and skip loading
-    {last_update, last_status} = if Application.get_env(:mailbloc, :env) == :test do
+    {last_update, last_status, trigger_immediate} = if Application.get_env(:mailbloc, :env) == :test do
       Logger.info("[BlocklistLoader] Test mode - empty tables")
-      {nil, :ok}
+      {nil, :ok, false}
     else
       # In dev/prod, try to load existing data synchronously
       case load_latest_blocklists() do
         :ok ->
           Logger.info("[BlocklistLoader] ✓ Loaded existing blocklists")
-          {DateTime.utc_now(), :ok}
+          {DateTime.utc_now(), :ok, false}
 
         {:error, :no_existing} ->
-          Logger.info("[BlocklistLoader] No existing blocklists")
-          {nil, :pending}
+          Logger.warning("[BlocklistLoader] ⚠️  No existing blocklists - triggering immediate download")
+          {nil, :pending, true}
       end
     end
 
@@ -64,6 +64,10 @@ defmodule Mailbloc.BlocklistLoader do
 
     # Schedule background updates (only in non-test mode)
     unless Application.get_env(:mailbloc, :env) == :test do
+      if trigger_immediate do
+        # Trigger immediate update when no existing blocklists found
+        send(self(), :update_blocklists)
+      end
       schedule_update()
     end
 

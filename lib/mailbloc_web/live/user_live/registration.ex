@@ -47,32 +47,41 @@ defmodule MailblocWeb.UserLive.Registration do
     {:ok, redirect(socket, to: MailblocWeb.UserAuth.signed_in_path(socket))}
   end
 
-  def mount(_params, _session, socket) do
-    changeset = Accounts.change_user_email(%User{}, %{}, validate_unique: false)
-
-    {:ok, assign_form(socket, changeset), temporary_assigns: [form: nil]}
+  def mount(_params, session, socket) do
+    changeset = Accounts.change_user_email(%User{})
+    ip = session["remote_ip"]
+    {:ok, socket |> assign(:remote_ip, ip) |> assign_form(changeset), temporary_assigns: [form: nil]}
   end
 
   @impl true
   def handle_event("save", %{"user" => user_params}, socket) do
-    case Accounts.register_user(user_params) do
-      {:ok, user} ->
-        {:ok, _} =
-          Accounts.deliver_login_instructions(
-            user,
-            &url(~p"/users/log-in/#{&1}")
+    email = user_params["email"]
+    ip = socket.assigns.remote_ip
+
+    if Mailbloc.SignupValidator.validate(email, ip) do
+      case Accounts.register_user(user_params) do
+        {:ok, user} ->
+          {:ok, _} =
+            Accounts.deliver_login_instructions(
+              user,
+              &url(~p"/users/log-in/#{&1}")
+            )
+
+          {:noreply,
+          socket
+          |> put_flash(
+            :info,
+            "An email was sent to #{user.email}, please access it to confirm your account."
           )
+          |> push_navigate(to: ~p"/users/log-in")}
 
-        {:noreply,
-         socket
-         |> put_flash(
-           :info,
-           "An email was sent to #{user.email}, please access it to confirm your account."
-         )
-         |> push_navigate(to: ~p"/users/log-in")}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+        {:error, %Ecto.Changeset{} = changeset} ->
+          {:noreply, assign_form(socket, changeset)}
+      end
+    else
+      {:noreply,
+      socket
+      |> put_flash(:error, "We're unable to complete your registration automatically at this time. If you have any questions, please reach out to our support team.")}
     end
   end
 
